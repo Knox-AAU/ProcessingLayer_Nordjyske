@@ -9,6 +9,11 @@ class TestParserIsValid(unittest.TestCase):
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
 
+    def test_is_valid(self):
+        json_data = '{"headline":"asdads", "paragraphs":[], "publication":"kads"}'
+        data = json.loads(json_data)
+        self.assertFalse(is_valid(data))
+
 
 if __name__ == '__main__':
     unittest.main()
