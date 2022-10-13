@@ -3,7 +3,7 @@ from article.article_class import ArticleClass
 
 def get_parsed_articles(file_path):
     data_objs = get_articles_data(file_path)
-    parsed_articles = 
+    parsed_articles = []
     for data_obj in data_objs:
         if is_valid(data_obj):
             parsed_articles.append(parse_article(data_obj))
