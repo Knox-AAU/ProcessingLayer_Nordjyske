@@ -4,12 +4,12 @@ from article.json_parser import is_valid
 
 class TestParserIsValid(unittest.TestCase):
 
-    def test_is_valid(self):
+    def test_is_valid_all_empty(self):
         json_data = '{"headline":"", "paragraphs":[], "publication":""}'
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
 
-    def test_is_valid(self):
+    def test_is_valid_paragraphs_empty(self):
         json_data = '{"headline":"asdads", "paragraphs":[], "publication":"kads"}'
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
