@@ -7,7 +7,7 @@ class TestParserIsValid(unittest.TestCase):
     def test_is_valid(self):
         json_data = '{"headline":"", "paragraphs":[], "publication":""}'
         data = json.loads(json_data)
-        self.assertEqual(is_valid(data), False)
+        self.assertFalse(is_valid(data))
 
 
 if __name__ == '__main__':
