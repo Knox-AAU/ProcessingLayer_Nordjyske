@@ -10,13 +10,17 @@ def get_parsed_articles(file_path):
     return parsed_articles
 
 def is_valid(data):
-    if (len(data['paragraphs']) > 1 and data['headline'] != '' and 'byline' in data and data['publication'] != ''):
-        return True
-    return False
+    if (len(data['paragraphs']) < 2 or data['headline'] == ''):
+        return False
+    elif ('byline' not in data or data['publication'] == ''):
+        return False
+    return True
 
 def parse_article(data):
-    par_art = ArticleClass(data['headline'], data['publication'], data['byline']['name'], data['paragraphs'])
-    return par_art
+    author_name = data['byline']['name']
+    art = ArticleClass(data['headline'], data['publication'], data['paragraphs'], author_name)
+    print(art.publisher)
+    return art
 
 def get_articles_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
