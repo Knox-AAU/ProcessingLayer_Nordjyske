@@ -47,7 +47,6 @@ def get_word_count(art):
     words = []
     for a in art.body_text:
         words.extend(a.split()) #delimiters are assumed to be white space characters
-    print(words)
     return len(words)
 
 def get_articles_data(file_path):
