@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: select vec words",
+            "type": "python",
+            "request": "launch",
+            "program": "select_vec_words.word_gen.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "Python: Main",
             "type": "python",
             "request": "launch",
