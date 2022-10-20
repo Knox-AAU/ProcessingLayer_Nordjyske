@@ -1,4 +1,5 @@
 import json
+import re
 from article.article_class import ArticleClass
 
 def get_parsed_articles(file_path):
@@ -43,11 +44,12 @@ def get_paragraph(data):
     body_texts.append(text)
     return sub_heads, body_texts
 
-def get_word_count(art):
-    words = []
-    for a in art.body_text:
-        words.extend(a.split()) #delimiters are assumed to be white space characters
-    return len(words)
+def get_word_count(article):
+    num_of_words = 0
+    for text in article.body_text:
+        accepted_chars_pattern = re.compile(r"[a-zæøå]+")
+        num_of_words += len(re.findall(accepted_chars_pattern, text.lower()))
+    return num_of_words
 
 def get_articles_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:

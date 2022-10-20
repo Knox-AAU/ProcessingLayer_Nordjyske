@@ -6,6 +6,6 @@ class ArticleClass:
     publisher = ''
     #author_mail = '' should have default?
     published_at = ''
-    total_words = ''
+    total_words = 0
     sub_head = []
     body_text = []
