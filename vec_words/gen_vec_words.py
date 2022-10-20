@@ -1,6 +1,5 @@
 import re
 import spacy
-from article.json_parser import get_parsed_articles
 NLP = spacy.load("da_core_news_sm")
 
 def make_unique_words(text):
@@ -11,8 +10,7 @@ def make_unique_words(text):
         words.append(match.group())
     return get_lemma_words(words)
 
-def get_unique_words_from_article(path):
-    articles = get_parsed_articles(path)
+def get_unique_words(articles):
     unique_words = set()
     for art in articles:
         all_body = ""
@@ -29,9 +27,3 @@ def get_lemma_words(words):
         if not token.is_stop and token.ent_type_ != "PER":
             word_lemmas.add(token.lemma_)
     return set(word_lemmas)
-
-def get_word_vecs():
-    path = 'jsonTestData/2017-06-08_himmerland.json'
-    words = get_unique_words_from_article(path)
-    print(len(words))
-get_word_vecs()
