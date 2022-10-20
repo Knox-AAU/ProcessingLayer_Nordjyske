@@ -8,7 +8,7 @@ def make_unique_words(text):
     words = []
     for match in accepted_chars_pattern.finditer(text):
         words.append(match.group())
-    return get_lemma_words(words)
+    return words
 
 def get_unique_words(articles):
     unique_words = set()
@@ -17,6 +17,7 @@ def get_unique_words(articles):
         for body in art.body_text:
             all_body += body
         unique_words = unique_words.union(make_unique_words(all_body))
+    unique_words = get_lemma_words(unique_words)
     return unique_words
 
 def get_lemma_words(words):
