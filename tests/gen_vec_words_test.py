@@ -21,7 +21,7 @@ class TestGetUniqueWords(unittest.TestCase):
             headline=['headline'], publication=['publication'], author_name=['name'])
         param_list = [
             ('hunden er sød', {'sød', 'hund'}), ('hun-den er sød', {'sød'}),
-            ('hu3n er sej', {'hu', 'sej'}), ('PETER KODER MEGET', {'peter', 'kode'})]
+            ('hu3n er sej', {'hu', 'sej'}), ('HAN KODER MEGET', {'kode'})]
         for p_1, p_2 in param_list:
             art_array = []
             art.body_text = p_1
