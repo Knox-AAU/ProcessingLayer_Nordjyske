@@ -1,7 +1,8 @@
 {
-    "folders": [
-        {
-            "path": "json_loader"
-        }
-    ]
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
 }
