@@ -5,6 +5,7 @@ from vec_words.gen_vec_words import make_unique_words
 from vec_words.gen_vec_words import get_unique_words
 NLP = spacy.load("da_core_news_sm")
 
+
 class TestMakeUniqueWords(unittest.TestCase):
     def test_make_unique_words_params(self):
         param_list = [('foo o', {'foo'}), ('', set()), ('f o o o', set()), ('f....o.o', set()),
@@ -15,14 +16,19 @@ class TestMakeUniqueWords(unittest.TestCase):
 
 
 class TestGetUniqueWords(unittest.TestCase):
-    def test_get_unique_words(self):
+    def test_get_unique_words_params(self):
         art = article_class.ArticleClass(
             headline=['headline'], publication=['publication'], author_name=['name'])
-        art.body_text = 'hunden er sød'
-        art_array = []
-        art_array.append(art)
-        result_set = {'sød', 'hund'}
-        self.assertEqual(get_unique_words(art_array, NLP), result_set)
+        param_list = [
+            ('hunden er sød', {'sød', 'hund'}), ('hun-den er sød', {'sød'}),
+            ('hu3n er sej', {'hu', 'sej'}), ('PETER KODER MEGET', {'peter', 'kode'})]
+        for p_1, p_2 in param_list:
+            art_array = []
+            art.body_text = p_1
+            art_array.append(art)
+            with self.subTest():
+                self.assertEqual(get_unique_words(
+                    art_array, NLP), p_2)
 
 
 if __name__ == '__main__':
