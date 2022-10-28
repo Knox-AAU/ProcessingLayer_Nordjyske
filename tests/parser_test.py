@@ -3,6 +3,7 @@ import json
 from article.json_parser import is_valid
 from article.json_parser import get_paragraph
 
+
 class TestParserIsValid(unittest.TestCase):
 
     def test_is_valid_all_empty(self):
@@ -14,6 +15,7 @@ class TestParserIsValid(unittest.TestCase):
         json_data = '{"headline":"asdads", "paragraphs":[], "publication":"kads"}'
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
+
 
 class TestParserGetParagraph(unittest.TestCase):
 
@@ -32,7 +34,7 @@ class TestParserGetParagraph(unittest.TestCase):
                     """
         data = json.loads(json_data)
         self.assertEqual(get_paragraph(data), (['sub'], ['12']))
-        
+
     def test_get_paragraph_append_all_paragraphs_subheaders(self):
         json_data = """[{"kind":"subheader", "value":"sub1"},
                         {"kind":"paragraph", "value":"1.1"},
@@ -41,7 +43,8 @@ class TestParserGetParagraph(unittest.TestCase):
                         {"kind":"paragraph", "value":"2.1"}]
                     """
         data = json.loads(json_data)
-        self.assertEqual(get_paragraph(data), (['sub1','sub2'], ['1.1 1.2','2.1']))
+        self.assertEqual(get_paragraph(
+            data), (['sub1', 'sub2'], ['1.1 1.2', '2.1']))
 
     def test_get_paragraph_append_all_paragraphs_subheaders_sub2_empty(self):
         json_data = """[{"kind":"subheader", "value":"sub1"},
@@ -50,15 +53,16 @@ class TestParserGetParagraph(unittest.TestCase):
                         {"kind":"subheader", "value":"sub2"}]
                     """
         data = json.loads(json_data)
-        self.assertEqual(get_paragraph(data), (['sub1','sub2'], ['1.1 1.2','']))
+        self.assertEqual(get_paragraph(
+            data), (['sub1', 'sub2'], ['1.1 1.2', '']))
 
     def test_get_paragraph_add_all_subheaders(self):
         json_data = """[{"kind":"subheader", "value":"sub1"},
                         {"kind":"subheader", "value":"sub2"}]
                     """
         data = json.loads(json_data)
-        self.assertEqual(get_paragraph(data), (['sub1','sub2'], ['']))
+        self.assertEqual(get_paragraph(data), (['sub1', 'sub2'], ['']))
+
 
 if __name__ == '__main__':
     unittest.main()
-    
