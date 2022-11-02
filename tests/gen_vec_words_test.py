@@ -3,6 +3,7 @@ import spacy
 from article import article_class
 from vec_words.gen_vec_words import make_unique_words
 from vec_words.gen_vec_words import get_unique_words
+from vec_words.gen_vec_words import get_lemma_words
 NLP = spacy.load("da_core_news_sm")
 
 class TestMakeUniqueWords(unittest.TestCase):
@@ -17,12 +18,13 @@ class TestMakeUniqueWords(unittest.TestCase):
 class TestGetUniqueWords(unittest.TestCase):
     def test_get_unique_words(self):
         art = article_class.ArticleClass(
-            headline=['headline'], publication=['publication'], author_name=['name'])
+            headline='headline', publication='publication', author_name='name')
         art.body_text = 'hunden er sød'
         art_array = []
         art_array.append(art)
-        result_set = {'sød', 'hund'}
+        result_set = {'hund'}
         self.assertEqual(get_unique_words(art_array, NLP), result_set)
+
 
 
 if __name__ == '__main__':
