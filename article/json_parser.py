@@ -26,7 +26,7 @@ def parse_article(data):
         art.author_mail = data['byline']['email']
     art.published_at = data['published_at']
     art.publisher = data['publisher']
-    art.total_words = get_word_count(art)
+    art.total_words = get_token_count(art)
     return art
 
 def get_paragraph(data):
@@ -44,12 +44,14 @@ def get_paragraph(data):
     body_texts.append(text)
     return sub_heads, body_texts
 
-def get_word_count(article):
+def get_token_count(article):
     num_of_words = 0
     for text in article.body_text:
-        accepted_chars_pattern = re.compile(r"[a-zæøå]+")
-        num_of_words += len(re.findall(accepted_chars_pattern, text.lower()))
+        num_of_words += len(re.findall(get_token_re_pattern(), text.lower()))
     return num_of_words
+
+def get_token_re_pattern():
+    return re.compile(r'[0-9]+,[0-9]+|[a-z0-9æøå]{2,}|[0-9]+')
 
 def get_articles_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:

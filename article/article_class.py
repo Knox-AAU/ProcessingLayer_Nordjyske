@@ -6,5 +6,6 @@ class ArticleClass:
     publisher = ''
     published_at = ''
     total_words = 0
+    tokens = {}
     sub_head = []
     body_text = []
