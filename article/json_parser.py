@@ -1,5 +1,6 @@
 import json
 import re
+import os
 from article.article_class import ArticleClass
 
 def get_parsed_articles(file_path):
@@ -7,7 +8,7 @@ def get_parsed_articles(file_path):
     parsed_articles = []
     for data_obj in data_objs:
         if is_valid(data_obj):
-            parsed_articles.append(parse_article(data_obj))
+            parsed_articles.append(parse_article(data_obj, file_path))
     return parsed_articles
 
 def is_valid(data):
@@ -17,7 +18,7 @@ def is_valid(data):
         return False
     return True
 
-def parse_article(data):
+def parse_article(data, file_path):
     art = ArticleClass(data['headline'], data['publication'], data['byline']['name'])
     result = get_paragraph(data['paragraphs'])
     art.sub_head = result[0]
@@ -27,6 +28,7 @@ def parse_article(data):
     art.published_at = data['published_at']
     art.publisher = data['publisher']
     art.total_words = get_token_count(art)
+    art.path = os.path.basename(file_path)
     return art
 
 def get_paragraph(data):
