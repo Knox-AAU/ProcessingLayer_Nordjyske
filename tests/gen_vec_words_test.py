@@ -15,12 +15,14 @@ class TestMakeUniqueWords(unittest.TestCase):
 
 class TestGetUniqueWords(unittest.TestCase):
     def test_get_words_from_articles_1(self):
-        art = article_class.ArticleClass(headline='headline', publication='publication', author_name='name')
+        art = article_class.ArticleClass(
+            headline='headline', publication='publication', author_name='name')
         param_list = [
             ('hunden er sød',{'hund': 1}),
             ('hund er sød og hunden hedder poison',{'hund': 2, 'poison': 1}),
+            ('hund er sej og hunden hedder peter',{'hund': 2}),
             ('Det er godt Nok bare 0 fedt AT have dyr!!!!',{}),
-            ('Jeg har spist skildpadde i dag',{'skildpadde': 1, 'dag': 1}),
+            ('Jeg har spist skildpadde i dag',{'dag': 1}),
         ]
         for p_1, p_2 in param_list:
             with self.subTest():
