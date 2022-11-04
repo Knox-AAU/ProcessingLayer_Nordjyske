@@ -6,7 +6,7 @@ from data_api.insert import insert_articles_tokens
 from console import print_error, update_status_console, console_confirmation
 from exceptions import HttpException
 
-TEST_DATA_PATH = 'jsonTestData/'
+TEST_DATA_PATH = '../jsonTestData/'
 
 def process_insert_articles(path, current_file, start_time):
     update_status_console(len(os.listdir(TEST_DATA_PATH)), current_file, start_time)

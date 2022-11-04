@@ -1,6 +1,5 @@
 from datetime import datetime
 import sys
-import os
 from colorama import Fore
 
 def print_warning(msg):
@@ -10,7 +9,6 @@ def print_error(msg):
     print(f'{Fore.RED}ERROR: {Fore.WHITE}'+msg)
 
 def update_status_console(num_of_files, current_file, start_time):
-    os.system('cls')
     print(f'{Fore.BLUE}File ' + str(current_file) + ' of ' + str(num_of_files))
     print(f'{Fore.WHITE}Time passed: '+ str(datetime.now() - start_time))
 

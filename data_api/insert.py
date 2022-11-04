@@ -52,14 +52,15 @@ def insert_content(art):
 def insert_tokens(art):
     json_data = []
     for token in art.tokens:
-        json_data.append({
-            'documentId': art.id,
-            'word': token,
-            'amount': art.tokens[token]['amount'],
-            'percent': art.tokens[token]['amount']/art.total_words,
-            'rank': art.tokens[token]['rank'],
-            'clusteringScore': 0
-        })
+        if token != '':
+            json_data.append({
+                'documentId': art.id,
+                'word': token,
+                'amount': art.tokens[token]['amount'],
+                'percent': art.tokens[token]['amount']/art.total_words,
+                'rank': art.tokens[token]['rank'],
+                'clusteringScore': 0
+            })
     make_post(API_URL+'word-ratios', json_data)
 
 def make_post(url, json_data):
