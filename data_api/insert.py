@@ -25,7 +25,7 @@ def insert_article(art):
         'uniqueWords': len(art.tokens)
     }]
     if art.publisher != 'Nordjyske Medier':
-        print_warning('Article is skipped. Not form Nordjyske Medier. Data: ' + str(json_data))
+        print_warning('Article is skipped. Not from Nordjyske Medier. Data: ' + str(json_data))
         return -1
     else:
         return make_post(API_URL+'documents', json_data)[0]
@@ -40,12 +40,12 @@ def insert_content(art):
         make_post(API_URL+'document-contents', json_data)
     else:
         json_data = []
-        for index, combination in enumerate(zip(art.sub_head, art.body_text)):
+        for index, sub_body in enumerate(zip(art.sub_head, art.body_text)):
             json_data.append({
                 'documentId': art.id,
                 "index": index,
-                'subheading': combination[0],
-                'content': combination[1]
+                'subheading': sub_body[0],
+                'content': sub_body[1]
             })
         make_post(API_URL+'document-contents', json_data)
 
