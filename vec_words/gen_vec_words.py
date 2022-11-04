@@ -8,7 +8,7 @@ def get_only_words(text):
     accepted_chars_pattern = re.compile(r'[a-zæøå]{2,}')
     words = []
     for match in accepted_chars_pattern.finditer(text):
-        words.append(match.group())
+        words.add(match.group())
     return words
 
 def get_words_from_articles(articles):
