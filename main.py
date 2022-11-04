@@ -3,29 +3,25 @@ import os
 from article.json_parser import get_parsed_articles
 from vec_words.extract_words import add_tokens_to_articles
 from data_api.insert import insert_articles_tokens
-from console import *
+from console import print_error, update_status_console, console_confirmation
 from exceptions import HttpException
 
 TEST_DATA_PATH = 'jsonTestData/'
 
-def get_articles_in_dir(path):
-    files = os.listdir(path)
-    articles = []
-    for (root, dirs, files) in os.walk(path):
-        for file in files:
-            articles = (get_parsed_articles(os.path.join(path,file)))
-    return articles
-
-def main():
-    print('start')
-    start_time = datetime.now()
-    articles = get_articles_in_dir(TEST_DATA_PATH)
-    articles = add_tokens_to_articles(articles)
+def process_insert_articles(path, current_file, start_time):
+    update_status_console(len(os.listdir(TEST_DATA_PATH)), current_file, start_time)
     try:
+        articles = get_parsed_articles(path)
+        articles = add_tokens_to_articles(articles)
         insert_articles_tokens(articles)
     except HttpException as e:
         print_error('HttpException: ' + str(e))
 
-    print('Time to get tokens: '+ str(datetime.now() - start_time))
-
+def main():
+    console_confirmation()
+    start_time = datetime.now()
+    files = os.listdir(TEST_DATA_PATH)
+    for (root, dirs, files) in os.walk(TEST_DATA_PATH):
+        for index, file in enumerate(files):
+            process_insert_articles(os.path.join(TEST_DATA_PATH, file), index, start_time)
 main()

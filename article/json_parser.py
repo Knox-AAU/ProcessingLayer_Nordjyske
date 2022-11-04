@@ -37,19 +37,24 @@ def get_paragraph(data):
     text = ''
     for d in data:
         if d['kind'] == 'paragraph':
-            text += d['value']
+            text += d['value'] + ' '
         elif d['kind'] == 'subheader':
             if text != '':
                 body_texts.append(text)
                 text = ''
-            sub_heads.append(d['value'])
+            sub_heads.append(d['value'] + ' ')
     body_texts.append(text)
     return sub_heads, body_texts
 
 def get_token_count(article):
     num_of_words = 0
+    all_text = article.headline + ' '
     for text in article.body_text:
-        num_of_words += len(re.findall(get_token_re_pattern(), text.lower()))
+        all_text += text
+    all_text += ' '
+    for text in article.sub_head:
+        all_text += text
+    num_of_words += len(re.findall(get_token_re_pattern(), all_text.lower()))
     return num_of_words
 
 def get_token_re_pattern():
