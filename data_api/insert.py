@@ -1,19 +1,17 @@
 import requests
-from console import print_warning
 from exceptions import HttpException
 
 API_URL = 'http://localhost:5501/document-data-api/'
+POST_TIMEOUT = 1.5
 
 def insert_articles_tokens(articles):
     for art in articles:
-        art.id = insert_article(art)
-        if art.id == -1:
-            break
-        insert_content(art)
-        insert_tokens(art)
+        art.id = make_post(API_URL+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
+        make_post(API_URL+'document-contents', get_content_json(art))
+        make_post(API_URL+'word-ratios', get_tokens_json(art))
 
-def insert_article(art):
-    json_data = [{
+def get_article_json(art):
+    return [{
         'sourceId': 1,
         'categoryId': 1,
         'title': art.headline,
@@ -24,32 +22,26 @@ def insert_article(art):
         'totalWords': art.total_words,
         'uniqueWords': len(art.tokens)
     }]
-    if art.publisher != 'Nordjyske Medier':
-        print_warning('Article is skipped. Not from Nordjyske Medier. Data: ' + str(json_data))
-        return -1
-    else:
-        return make_post(API_URL+'documents', json_data)[0]
 
-def insert_content(art):
+def get_content_json(art):
     if len(art.sub_head) == 0:
-        json_data = [{
+        return [{
             'documentId': art.id,
-            "index": 0,
+            'index': 0,
             'content': art.body_text[0]
         }]
-        make_post(API_URL+'document-contents', json_data)
     else:
         json_data = []
         for index, sub_body in enumerate(zip(art.sub_head, art.body_text)):
             json_data.append({
                 'documentId': art.id,
-                "index": index,
+                'index': index,
                 'subheading': sub_body[0],
                 'content': sub_body[1]
             })
-        make_post(API_URL+'document-contents', json_data)
+        return json_data
 
-def insert_tokens(art):
+def get_tokens_json(art):
     json_data = []
     for token in art.tokens:
         if token != '':
@@ -57,15 +49,16 @@ def insert_tokens(art):
                 'documentId': art.id,
                 'word': token,
                 'amount': art.tokens[token]['amount'],
-                'percent': art.tokens[token]['amount']/art.total_words,
+                'percent': art.tokens[token]['amount']/len(art.tokens),
                 'rank': art.tokens[token]['rank'],
                 'clusteringScore': 0
             })
-    make_post(API_URL+'word-ratios', json_data)
+    return json_data
 
 def make_post(url, json_data):
-    r = requests.post(url, json=json_data, timeout=1.5)
+    r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
     if r.status_code != 200:
-        raise HttpException('Post - code: ' + str(r.status_code) + ' - Data:' + r.text)
+        data = '|| Response: ' + r.text + ' || Data: ' + json_data
+        raise HttpException('Post. Code: ' + str(r.status_code) + data)
     else:
         return r.json()

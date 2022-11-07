@@ -2,6 +2,7 @@ import json
 import re
 import os
 from article.article_class import ArticleClass
+from article.validation import is_valid
 
 def get_parsed_articles(file_path):
     data_objs = get_articles_data(file_path)
@@ -11,12 +12,6 @@ def get_parsed_articles(file_path):
             parsed_articles.append(parse_article(data_obj, file_path))
     return parsed_articles
 
-def is_valid(data):
-    if (len(data['paragraphs']) < 2 or data['headline'] == ''):
-        return False
-    elif ('byline' not in data or data['publication'] == ''):
-        return False
-    return True
 
 def parse_article(data, file_path):
     art = ArticleClass(data['headline'], data['publication'], data['byline']['name'])
