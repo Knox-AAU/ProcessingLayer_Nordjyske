@@ -39,6 +39,7 @@ def check_publisher(data):
     if 'publisher' not in data or data['publisher'] != 'Nordjyske Medier':
         print_warning('Article is skipped. Not from Nordjyske Medier. Data: ' + data)
         return False
-
+    return True
+    
 def is_valid_str(var):
     return (isinstance(var, str) and len(var) > 0)

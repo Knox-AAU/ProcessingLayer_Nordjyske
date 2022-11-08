@@ -1,21 +1,6 @@
 import unittest
 import json
-from article.json_parser import is_valid
 from article.json_parser import get_paragraph
-
-
-class TestParserIsValid(unittest.TestCase):
-
-    def test_is_valid_all_empty(self):
-        json_data = '{"headline":"", "paragraphs":[], "publication":""}'
-        data = json.loads(json_data)
-        self.assertFalse(is_valid(data))
-
-    def test_is_valid_paragraphs_empty(self):
-        json_data = '{"headline":"asdads", "paragraphs":[], "publication":"kads"}'
-        data = json.loads(json_data)
-        self.assertFalse(is_valid(data))
-
 
 class TestParserGetParagraph(unittest.TestCase):
 
