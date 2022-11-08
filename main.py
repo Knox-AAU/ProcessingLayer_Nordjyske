@@ -1,28 +1,28 @@
 from datetime import datetime
 import os
-import spacy
 from article.json_parser import get_parsed_articles
-from vec_words.gen_vec_words import get_unique_words
-NLP = spacy.load("da_core_news_sm")
+from vec_words.extract_words import add_tokens_to_articles
+from data_api.insert import insert_articles_tokens
+from console import print_error, update_status_console, console_confirmation, print_success
+from exceptions import HttpException
 
-TEST_DATA_PATH = 'jsonTestData/'
+DATA_PATH = 'jsonTestData/'
 
-def get_articles_in_dir(path):
-    articles = []
-    files = os.listdir(path)
-    for (root, dirs, files) in os.walk(path):
-        for file in files:
-            articles.extend(get_parsed_articles(os.path.join(path,file)))
-    return articles
+def process_insert_articles(path, current_file, start_time):
+    update_status_console(len(os.listdir(DATA_PATH)), current_file, start_time)
+    articles = get_parsed_articles(path)
+    articles = add_tokens_to_articles(articles)
+    insert_articles_tokens(articles)
 
 def main():
-    print("start")
-    startTime = datetime.now()
-    articles = get_articles_in_dir(TEST_DATA_PATH)
-    print("parser time: "+ str(datetime.now() - startTime))
-    startTime = datetime.now()
-    print('Num of articles: ' + str(len(articles)))
-    words = get_unique_words(articles, NLP)
-    print("gen_vec_words time: "+ str(datetime.now() - startTime))
-    print('Num of unique words: ' + str(len(words)))
+    console_confirmation()
+    start_time = datetime.now()
+    files = os.listdir(DATA_PATH)
+    try:
+        for (root, dirs, files) in os.walk(DATA_PATH):
+            for index, file in enumerate(files):
+                process_insert_articles(os.path.join(DATA_PATH, file), index, start_time)
+        print_success(start_time, len(files))
+    except HttpException as e:
+        print_error('HttpException: ' + str(e))
 main()
