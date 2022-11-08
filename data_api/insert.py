@@ -33,12 +33,13 @@ def get_content_json(art):
     else:
         json_data = []
         for index, sub_body in enumerate(zip(art.sub_head, art.body_text)):
-            json_data.append({
-                'documentId': art.id,
-                'index': index,
-                'subheading': sub_body[0],
-                'content': sub_body[1]
-            })
+            if (sub_body[0] != '' and sub_body[1] != ''):
+                json_data.append({
+                    'documentId': art.id,
+                    'index': index,
+                    'subheading': sub_body[0],
+                    'content': sub_body[1]
+                })
         return json_data
 
 def get_tokens_json(art):
