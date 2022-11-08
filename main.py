@@ -3,7 +3,7 @@ import os
 from article.json_parser import get_parsed_articles
 from vec_words.extract_words import add_tokens_to_articles
 from data_api.insert import insert_articles_tokens
-from console import print_error, update_status_console, console_confirmation
+from console import print_error, update_status_console, console_confirmation, print_success
 from exceptions import HttpException
 
 DATA_PATH = 'jsonTestData/'
@@ -22,6 +22,7 @@ def main():
         for (root, dirs, files) in os.walk(DATA_PATH):
             for index, file in enumerate(files):
                 process_insert_articles(os.path.join(DATA_PATH, file), index, start_time)
+        print_success(start_time, len(files))
     except HttpException as e:
         print_error('HttpException: ' + str(e))
 main()
