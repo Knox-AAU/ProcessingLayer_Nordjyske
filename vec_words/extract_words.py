@@ -45,6 +45,6 @@ def get_tokens(text):
     tokens = []
     for match in accepted_tokens_pattern.finditer(text):
         token = match.group()
-        if token < LARGEST_TOKEN:
+        if len(token) < LARGEST_TOKEN:
             tokens.append(match.group())
     return tokens

@@ -4,7 +4,7 @@ from vec_words.extract_words import add_tokens_to_articles
 from vec_words.token_dict_class import TokenDict
 
 class TestAddTokensToArticles(unittest.TestCase):
-    def test_add_tokens_to_articles_1(self):
+    def test_add_tokens_to_articles_general(self):
         art_input = ArticleClass('headline', 'publication', 'name')
         art_input.sub_head = ['test test subhead.']
         art_input.body_text = ['test word.']
@@ -16,7 +16,7 @@ class TestAddTokensToArticles(unittest.TestCase):
         art_output = add_tokens_to_articles([art_input])
         self.assertDictEqual(art_output[0].tokens, tokens)
 
-    def test_add_tokens_to_articles_2(self):
+    def test_add_tokens_to_articles_one_for_each(self):
         art_input = ArticleClass('test', 'publication', 'name')
         art_input.sub_head = ['test test test2.']
         art_input.body_text = ['test test2 test1']
@@ -28,7 +28,7 @@ class TestAddTokensToArticles(unittest.TestCase):
         self.assertDictEqual(art_output[0].tokens, tokens)
 
 
-    def test_add_tokens_to_articles_3(self):
+    def test_add_tokens_to_articles_same_count(self):
         art_input = ArticleClass('test1', 'publication', 'name')
         art_input.sub_head = ['test2']
         art_input.body_text = ['test3']
@@ -39,7 +39,7 @@ class TestAddTokensToArticles(unittest.TestCase):
         art_output = add_tokens_to_articles([art_input])
         self.assertDictEqual(art_output[0].tokens, tokens)
 
-    def test_add_tokens_to_articles_4(self):
+    def test_add_tokens_to_articles_no_sub(self):
         art_input = ArticleClass('test1 test2', 'publication', 'name')
         art_input.body_text = ['test2 test2 ']
         tokens = TokenDict()

@@ -14,7 +14,7 @@ class TestValidation(unittest.TestCase):
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
 
-    def test_is_valid_valid1(self):
+    def test_is_valid_valid_only_paragraphs(self):
         json_data = """{"headline":"text", "paragraphs":[
             {"kind": "paragraph", "value": "test"},
             {"kind": "paragraph", "value": "test2"}],
@@ -23,7 +23,7 @@ class TestValidation(unittest.TestCase):
         data = json.loads(json_data)
         self.assertTrue(is_valid(data))
 
-    def test_is_valid_valid2(self):
+    def test_is_valid_valid_subheader(self):
         json_data = """{"headline":"text", "paragraphs":[
             {"kind": "subheader", "value": "sub"},
             {"kind": "paragraph", "value": "test"}],

@@ -14,7 +14,7 @@ class TestMakeUniqueWords(unittest.TestCase):
 
 
 class TestGetUniqueWords(unittest.TestCase):
-    def test_get_words_from_articles_1(self):
+    def test_get_words_from_articles(self):
         art = article_class.ArticleClass(
             headline='headline', publication='publication', author_name='name')
         param_list = [
