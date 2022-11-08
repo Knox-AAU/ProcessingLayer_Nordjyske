@@ -2,7 +2,6 @@ from collections import Counter
 import spacy
 from vec_words.token_dict_class import TokenDict
 from article.json_parser import get_token_re_pattern
-spacy.prefer_gpu()
 NLP = spacy.load('da_core_news_sm')
 
 def add_tokens_to_articles(articles):
