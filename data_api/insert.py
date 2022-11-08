@@ -58,7 +58,7 @@ def get_tokens_json(art):
 def make_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
     if r.status_code != 200:
-        data = '|| Response: ' + r.text + ' || Data: ' + json_data
+        data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
         raise HttpException('Post. Code: ' + str(r.status_code) + data)
     else:
         return r.json()
