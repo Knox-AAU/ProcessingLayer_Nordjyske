@@ -4,6 +4,8 @@ from vec_words.token_dict_class import TokenDict
 from article.json_parser import get_token_re_pattern
 NLP = spacy.load('da_core_news_sm')
 
+LARGEST_TOKEN = 75
+
 def add_tokens_to_articles(articles):
     for art in articles:
         all_body = ''
@@ -40,7 +42,9 @@ def get_trimmed_words(words):
 def get_tokens(text):
     text = text.lower()
     accepted_tokens_pattern = get_token_re_pattern()
-    words = []
+    tokens = []
     for match in accepted_tokens_pattern.finditer(text):
-        words.append(match.group())
-    return words
+        token = match.group()
+        if token < LARGEST_TOKEN:
+            tokens.append(match.group())
+    return tokens

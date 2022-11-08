@@ -48,4 +48,12 @@ class TestValidation(unittest.TestCase):
             "published_at": "t", "publisher": "Nordjyske Medier","publication": "h"}"""
         data = json.loads(json_data)
         self.assertFalse(is_valid(data))
+
+    def test_is_valid_headline_to_long(self):
+        json_data = """{"headline":"texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext", "paragraphs":[
+            {"kind": "paragraph", "value": "test"}],
+            "publication":"pub", "byline": {"name": "k", "email": "k@dk.dk"},
+            "published_at": "t", "publisher": "Nordjyske Medier","publication": "h"}"""
+        data = json.loads(json_data)
+        self.assertFalse(is_valid(data))
     

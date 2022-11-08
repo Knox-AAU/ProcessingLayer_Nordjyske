@@ -6,7 +6,8 @@ def is_valid(data):
         check_byline(data) and
         check_for_attribute(data, 'publication') and
         check_for_attribute(data, 'published_at') and
-        check_publisher(data)):
+        check_publisher(data) and
+        check_len_for_all(data)):
         return True
     else:
         return False
@@ -44,3 +45,14 @@ def check_publisher(data):
 
 def is_valid_str(var):
     return (isinstance(var, str) and len(var) > 0)
+
+def check_len_for_all(data):
+    max_len = 100
+    data_list = []
+    data_list.append(data['headline'])
+    data_list.append(data['byline']['name'])
+    data_list.append(data['published_at'])
+    for d in data_list:
+        if len(d) > max_len:
+            return False
+    return True
