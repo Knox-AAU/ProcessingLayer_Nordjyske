@@ -1,35 +1,30 @@
 from sklearn.cluster import KMeans
-from sklearn import metrics
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import silhouette_score
-import seaborn as sns
-import pandas as pd
+import time
 
-x = np.random.rand(100, 50)
-# print(df.head)
+x = np.random.rand(400000, 2000) #(antal af lister, antal af dimensioner)
+print(x.shape)
 
-# kmeans = KMeans(n_clusters=5, random_state=0).fit(x)
-# labels = kmeans.labels_
-
-# inertias = []
-
-# for i in range(1, 11):
-#     kmeans = KMeans(n_clusters=i)
-#     kmeans.fit(x)
-#     inertias.append(kmeans.inertia_)
-
-# plt.plot(range(1, 11), inertias, marker='o')
-# plt.title('Elbow method')
+start_time = time.time()
+#Find optimal amount of cluster with elbow method
+intertia=[]
+for i in range(1,10):
+    print("i: ", i)
+    kmeans = KMeans(i)
+    kmeans.fit(x)
+    temp_iter = kmeans.inertia_
+    intertia.append(temp_iter)
+    print("--- %s seconds ---" % (time.time() - start_time))
+print("--- Total time: %s seconds ---" % (time.time() - start_time))
+# number_clusters = range(1,10)
+# plt.plot(number_clusters,intertia)
+# plt.title('The Elbow')
 # plt.xlabel('Number of clusters')
-# plt.ylabel('Inertia')
+# plt.ylabel('Intertia')
 # plt.show()
 
-#model = KMeans()
-#visualizer = KElbowVisualizer(model, k=(1, 12)).fit(df)
-# visualizer.show()
-
-kmeans = KMeans(n_clusters=4, init='k-means++', random_state=0).fit(x)
-#sns.scatterplot(data=x, x="var1", y="var2", hue=kmeans.labels_)
-# plt.show()
-print(Counter(kmeans.labels_))
+#Performing the K-Means clustering algorithm
+# kmeans = KMeans(n_clusters=4).fit(x)
+# labels = kmeans.labels_
+#print(labels)
