@@ -45,6 +45,7 @@ def get_content_json(art):
 
 def get_tokens_json(art):
     json_data = []
+    total_amount = art.tokens.get_total_amount()
     for token in art.tokens:
         if token != '':
             amount = art.tokens[token]['amount']
@@ -53,7 +54,7 @@ def get_tokens_json(art):
                 'documentId': art.id,
                 'word': token,
                 'amount': amount,
-                'percent': amount/len(art.tokens),
+                'percent': amount/total_amount,
                 'rank': rank,
                 'clusteringScore': get_score(amount, rank)
             })
