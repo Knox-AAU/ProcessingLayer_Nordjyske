@@ -1,16 +1,15 @@
 import requests
 from exceptions import HttpException
 
-API_URL = 'http://localhost:5501/document-data-api/'
 POST_TIMEOUT = 1.5
 HEADLINE_SCALAR = 1.5
 SUBHEADER_SCALAR = 1.25
 
-def insert_articles_tokens(articles):
+def insert_articles_tokens(articles, api_url):
     for art in articles:
-        art.id = make_post(API_URL+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
-        make_post(API_URL+'document-contents', get_content_json(art))
-        make_post(API_URL+'word-ratios', get_tokens_json(art))
+        art.id = make_post(api_url+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
+        make_post(api_url+'document-contents', get_content_json(art))
+        make_post(api_url+'word-ratios', get_tokens_json(art))
 
 def get_article_json(art):
     return [{

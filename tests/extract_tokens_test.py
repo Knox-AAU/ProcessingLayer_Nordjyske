@@ -1,6 +1,6 @@
 import unittest
 from article.article_class import ArticleClass
-from vec_words.extract_words import add_tokens_to_articles
+from vec_words.extract_tokens import add_tokens_to_articles
 from vec_words.token_dict_class import TokenDict
 
 class TestAddTokensToArticles(unittest.TestCase):
