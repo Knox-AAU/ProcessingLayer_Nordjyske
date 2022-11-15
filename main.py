@@ -1,18 +1,19 @@
 from datetime import datetime
 import os
 from article.json_parser import get_parsed_articles
-from vec_words.extract_words import add_tokens_to_articles
+from vec_words.extract_tokens import add_tokens_to_articles
 from data_api.insert import insert_articles_tokens
 from console import print_error, update_status_console, console_confirmation, print_success
 from exceptions import HttpException
 
 DATA_PATH = 'jsonTestData/'
+API_URL = 'http://localhost:5501/document-data-api/'
 
 def process_insert_articles(path, current_file, start_time):
     update_status_console(len(os.listdir(DATA_PATH)), current_file, start_time)
     articles = get_parsed_articles(path)
     articles = add_tokens_to_articles(articles)
-    insert_articles_tokens(articles)
+    insert_articles_tokens(articles, API_URL)
 
 def main():
     console_confirmation()
