@@ -1,8 +1,8 @@
 import json
 import re
 import os
-from article.article_class import ArticleClass
-from article.validation import is_valid
+from articles.article_class import ArticleClass
+from articles.validation import is_valid
 
 def get_parsed_articles(file_path):
     data_objs = get_articles_data(file_path)

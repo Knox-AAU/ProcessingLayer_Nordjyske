@@ -1,7 +1,7 @@
 import unittest
-from article import article_class
-from vec_words.gen_vec_words import get_only_words
-from vec_words.gen_vec_words import get_words_from_articles
+from articles import article_class
+from tokens.gen_vec_words import get_only_words
+from tokens.gen_vec_words import get_words_from_articles
 
 class TestMakeUniqueWords(unittest.TestCase):
     def test_get_only_words_params(self):

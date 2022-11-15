@@ -1,6 +1,6 @@
 import unittest
 import json
-from article.json_parser import get_paragraph
+from articles.json_parser import get_paragraph
 
 class TestParserGetParagraph(unittest.TestCase):
 

@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
-from article.json_parser import get_parsed_articles
-from vec_words.extract_tokens import add_tokens_to_articles
+from articles.json_parser import get_parsed_articles
+from tokens.extract_tokens import add_tokens_to_articles
 from data_api.insert import insert_articles_tokens
 from console import print_error, update_status_console, console_confirmation, print_success
 from exceptions import HttpException

@@ -1,7 +1,7 @@
 from collections import Counter
 import spacy
-from vec_words.token_dict_class import TokenDict
-from article.json_parser import get_token_re_pattern
+from tokens.token_dict_class import TokenDict
+from articles.json_parser import get_token_re_pattern
 NLP = spacy.load('da_core_news_sm')
 
 LARGEST_TOKEN = 75
