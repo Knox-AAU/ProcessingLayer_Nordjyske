@@ -3,6 +3,8 @@ from exceptions import HttpException
 
 API_URL = 'http://localhost:5501/document-data-api/'
 POST_TIMEOUT = 1.5
+HEADLINE_SCALAR = 1.5
+SUBHEADER_SCALAR = 1.25
 
 def insert_articles_tokens(articles):
     for art in articles:
@@ -46,15 +48,25 @@ def get_tokens_json(art):
     json_data = []
     for token in art.tokens:
         if token != '':
+            amount = art.tokens[token]['amount']
+            rank = art.tokens[token]['rank']
             json_data.append({
                 'documentId': art.id,
                 'word': token,
-                'amount': art.tokens[token]['amount'],
-                'percent': art.tokens[token]['amount']/len(art.tokens),
-                'rank': art.tokens[token]['rank'],
-                'clusteringScore': 0
+                'amount': amount,
+                'percent': amount/len(art.tokens),
+                'rank': rank,
+                'clusteringScore': get_score(amount, rank)
             })
     return json_data
+
+def get_score(amount, rank):
+    if rank == 1:
+        return amount*HEADLINE_SCALAR
+    elif rank == 2:
+        return amount*SUBHEADER_SCALAR
+    elif rank == 3:
+        return amount
 
 def make_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
