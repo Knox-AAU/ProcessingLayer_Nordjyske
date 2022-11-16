@@ -1,16 +1,15 @@
 from console import print_warning
 
+MAX_LEN = 100
+
 def is_valid(data):
-    if (check_paragraphs(data) and
-        check_for_attribute(data, 'headline') and
-        check_byline(data) and
-        check_for_attribute(data, 'publication') and
-        check_for_attribute(data, 'published_at') and
-        check_publisher(data) and
-        check_len_for_all(data)):
-        return True
-    else:
-        return False
+    return (check_paragraphs(data) and
+            check_for_attribute(data, 'headline') and
+            check_byline(data) and
+            check_for_attribute(data, 'publication') and
+            check_for_attribute(data, 'published_at') and
+            check_publisher(data) and
+            check_len_for_all(data))
 
 def check_paragraphs(data):
     if 'paragraphs' not in data:
@@ -47,12 +46,11 @@ def is_valid_str(var):
     return (isinstance(var, str) and len(var) > 0)
 
 def check_len_for_all(data):
-    max_len = 100
     data_list = []
     data_list.append(data['headline'])
     data_list.append(data['byline']['name'])
     data_list.append(data['published_at'])
     for d in data_list:
-        if len(d) > max_len:
+        if len(d) > MAX_LEN:
             return False
     return True

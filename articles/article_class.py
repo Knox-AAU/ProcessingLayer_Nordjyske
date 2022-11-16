@@ -1,3 +1,5 @@
+from tokens.token_dict_class import TokenDict
+
 class ArticleClass:
     def __init__(self, headline, publication, author_name):
         self.headline = headline
@@ -9,3 +11,5 @@ class ArticleClass:
     tokens = {}
     sub_head = []
     body_text = []
+    path = ''
+    tokens = TokenDict()
