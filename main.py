@@ -10,22 +10,30 @@ from exceptions import HttpException
 DATA_PATH = 'jsonTestData/'
 API_URL = 'http://localhost:5501/document-data-api/'
 
-def process_insert_articles(path, current_file, start_time):
-    update_status_console(len(os.listdir(DATA_PATH)), current_file, start_time)
-    articles = get_parsed_articles(path)
-    articles = add_tokens_to_articles(articles)
-    insert_articles_tokens(articles, API_URL)
+def get_articles_tokens(files, start_time):
+    for file in files:
+        update_status_console(len(os.listdir(DATA_PATH)), file['index'], start_time)
+        articles = get_parsed_articles(file['path'])
+        articles = add_tokens_to_articles(articles)
+    return articles   
+
+def get_files_data(path):
+    all_files = []
+    files = os.listdir(path)
+    for (root, dirs, files) in os.walk(path):
+            for index, file in enumerate(files):
+                all_files.append({'path': os.path.join(DATA_PATH, file), 'index': index})
+    return all_files
 
 def main():
     console_confirmation()
     start_time = datetime.now()
-    files = os.listdir(DATA_PATH)
     try:
-        for (root, dirs, files) in os.walk(DATA_PATH):
-            for index, file in enumerate(files):
-                process_insert_articles(os.path.join(DATA_PATH, file), index, start_time)
+        files = get_files_data(DATA_PATH)
+        articles = get_articles_tokens(files, start_time)
+        #insert_articles_tokens(articles, API_URL)
         print_success(start_time, len(files))
-        update_word_relevance()
+        #update_word_relevance(API_URL)
     except HttpException as e:
         print_error('HttpException: ' + str(e))
 main()
