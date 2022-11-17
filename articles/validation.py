@@ -7,6 +7,7 @@ def is_valid(data):
             check_for_attribute(data, 'headline') and
             check_byline(data) and
             check_for_attribute(data, 'publication') and
+            check_for_attribute(data, 'id') and
             check_for_attribute(data, 'published_at') and
             check_publisher(data) and
             check_len_for_all(data))

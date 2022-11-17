@@ -9,9 +9,20 @@ def get_parsed_articles(file_path):
     parsed_articles = []
     for data_obj in data_objs:
         if is_valid(data_obj):
-            parsed_articles.append(parse_article(data_obj, file_path))
+            art = parse_article(data_obj, file_path)
+            if is_not_duplicate(parsed_articles, art):
+                parsed_articles.append(art)
     return parsed_articles
 
+def is_not_duplicate(articles, current_art):
+    for art in articles:
+        if art.data_id == current_art.data_id:
+            if art.total_words > current_art.total_words:
+                articles.remove(art)
+                return True
+            else:
+                return False
+    return True
 
 def parse_article(data, file_path):
     art = ArticleClass(data['headline'], data['publication'], data['byline']['name'])
@@ -20,6 +31,7 @@ def parse_article(data, file_path):
     art.body_text = result[1]
     art.published_at = data['published_at']
     art.publisher = data['publisher']
+    art.data_id = data['id']
     art.total_words = get_token_count(art)
     art.path = os.path.basename(file_path)
     return art

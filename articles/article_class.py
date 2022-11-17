@@ -7,6 +7,7 @@ class ArticleClass:
         self.author_name = author_name
     publisher = ''
     published_at = ''
+    data_id = 0
     total_words = 0
     tokens = {}
     sub_head = []
