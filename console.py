@@ -41,4 +41,7 @@ def console_confirmation():
         return
     else:
         sys.exit()
+
+def print_all_done():
+    print(f'{ConColors.GREEN}All done')
         
