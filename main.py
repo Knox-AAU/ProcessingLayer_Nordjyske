@@ -1,6 +1,7 @@
 from datetime import datetime
 import os
 from articles.json_parser import get_parsed_articles
+from articles.json_parser import remove_duplicates
 from tokens.extract_tokens import add_tokens_to_articles
 from data_api.insert import insert_articles_tokens
 from data_api.update import update_word_relevance
@@ -15,7 +16,7 @@ def get_articles_tokens(files, start_time):
         update_status_console(len(os.listdir(DATA_PATH)), file['index'], start_time)
         articles = get_parsed_articles(file['path'])
         articles = add_tokens_to_articles(articles)
-    return articles   
+    return articles
 
 def get_files_data(path):
     all_files = []
@@ -31,9 +32,12 @@ def main():
     try:
         files = get_files_data(DATA_PATH)
         articles = get_articles_tokens(files, start_time)
-        #insert_articles_tokens(articles, API_URL)
+        print('remove_duplicates')
+        articles = remove_duplicates(articles)
+        print('insert_articles_tokens')
+        insert_articles_tokens(articles, API_URL)
         print_success(start_time, len(files))
-        #update_word_relevance(API_URL)
+        update_word_relevance(API_URL)
     except HttpException as e:
         print_error('HttpException: ' + str(e))
 main()

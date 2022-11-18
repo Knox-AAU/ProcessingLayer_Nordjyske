@@ -9,20 +9,11 @@ def get_parsed_articles(file_path):
     parsed_articles = []
     for data_obj in data_objs:
         if is_valid(data_obj):
-            art = parse_article(data_obj, file_path)
-            if is_not_duplicate(parsed_articles, art):
-                parsed_articles.append(art)
+            parsed_articles.append(parse_article(data_obj, file_path))
     return parsed_articles
 
-def is_not_duplicate(articles, current_art):
-    for art in articles:
-        if art.data_id == current_art.data_id:
-            if art.total_words > current_art.total_words:
-                articles.remove(art)
-                return True
-            else:
-                return False
-    return True
+def remove_duplicates(articles):
+    return list({item.data_id:item for item in articles}.values())
 
 def parse_article(data, file_path):
     art = ArticleClass(data['headline'], data['publication'], data['byline']['name'])

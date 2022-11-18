@@ -31,7 +31,6 @@ def make_tokens(text, rank):
     return tokens_dict
 
 def get_trimmed_words(words):
-    return words # REMOVE
     words_str = ' '.join(words)
     doc = NLP(words_str)
     word_lemmas = []
