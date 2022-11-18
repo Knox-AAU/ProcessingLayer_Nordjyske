@@ -72,7 +72,7 @@ class TestParserGetParagraph(unittest.TestCase):
         arts.append(art2)
         result = remove_duplicates(arts)
         self.assertTrue(len(result)==2)
-
+        
     def test_is_not_duplicate_2(self):
         arts = []
         art1 = article_class.ArticleClass(
@@ -87,6 +87,7 @@ class TestParserGetParagraph(unittest.TestCase):
         arts.append(art2)
         result = remove_duplicates(arts)
         self.assertEqual(result, [art2])
+
 
 
 if __name__ == '__main__':

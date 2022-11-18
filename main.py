@@ -12,18 +12,19 @@ DATA_PATH = 'jsonTestData/'
 API_URL = 'http://localhost:5501/document-data-api/'
 
 def get_articles_tokens(files, start_time):
+    articles = []
     for file in files:
         update_status_console(len(os.listdir(DATA_PATH)), file['index'], start_time)
-        articles = get_parsed_articles(file['path'])
-        articles = add_tokens_to_articles(articles)
+        arts = get_parsed_articles(file['path'])
+        articles.extend(add_tokens_to_articles(arts))
     return articles
 
 def get_files_data(path):
     all_files = []
     files = os.listdir(path)
     for (root, dirs, files) in os.walk(path):
-            for index, file in enumerate(files):
-                all_files.append({'path': os.path.join(DATA_PATH, file), 'index': index})
+        for index, file in enumerate(files):
+            all_files.append({'path': os.path.join(DATA_PATH, file), 'index': index})
     return all_files
 
 def main():
