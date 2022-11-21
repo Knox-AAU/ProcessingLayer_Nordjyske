@@ -1,7 +1,7 @@
 import unittest
 from article.article_class import ArticleClass
-from data_api.insert import get_content_json
-from data_api.insert import get_tokens_json
+from data_handler.insert import get_content_json
+from data_handler.insert import get_tokens_json
 
 
 class TestInsertArticlesTokens(unittest.TestCase):
