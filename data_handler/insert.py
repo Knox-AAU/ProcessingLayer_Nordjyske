@@ -68,8 +68,7 @@ def get_score(amount, rank):
     elif rank == 3:
         return amount
 
-def http_post(url, json_data):
-    return[0]
+def make_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
     if r.status_code != 200:
         data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
