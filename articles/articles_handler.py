@@ -20,7 +20,7 @@ def insert_arts_db(data_path, api_url):
         print('Insert_articles_tokens...')
         insert_articles_tokens(articles, api_url)
         print_success(start_time, len(files))
-        #update_word_relevance(api_url)
+        update_word_relevance(api_url)
     except HttpException as e:
         print_error('HttpException: ' + str(e))
 
