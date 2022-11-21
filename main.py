@@ -1,44 +1,21 @@
-from datetime import datetime
-import os
-from articles.json_parser import get_parsed_articles
-from articles.json_parser import remove_duplicates
-from tokens.extract_tokens import add_tokens_to_articles
-from data_api.insert import insert_articles_tokens
-from data_api.update import update_word_relevance
-from console import print_error, update_status_console, console_confirmation, print_success
-from exceptions import HttpException
+from data_handler.file_load_save import save_words_count
+from tokens.gen_vec_words import get_words_count
+from articles.articles_handler import insert_arts_db
+from console import print_menu
 
 DATA_PATH = 'jsonTestData/'
+STORAGE_PATH = 'storage_data/'
 API_URL = 'http://localhost:5501/document-data-api/'
 
-def get_articles_tokens(files, start_time):
-    articles = []
-    for file in files:
-        update_status_console(len(os.listdir(DATA_PATH)), file['index'], start_time)
-        arts = get_parsed_articles(file['path'])
-        articles.extend(add_tokens_to_articles(arts))
-    return articles
-
-def get_files_data(path):
-    all_files = []
-    files = os.listdir(path)
-    for (root, dirs, files) in os.walk(path):
-        for index, file in enumerate(files):
-            all_files.append({'path': os.path.join(DATA_PATH, file), 'index': index})
-    return all_files
-
 def main():
-    console_confirmation()
-    start_time = datetime.now()
-    try:
-        files = get_files_data(DATA_PATH)
-        articles = get_articles_tokens(files, start_time)
-        print('remove_duplicates')
-        articles = remove_duplicates(articles)
-        print('insert_articles_tokens')
-        insert_articles_tokens(articles, API_URL)
-        print_success(start_time, len(files))
-        update_word_relevance(API_URL)
-    except HttpException as e:
-        print_error('HttpException: ' + str(e))
+    match print_menu():
+        case '1':
+            insert_arts_db(DATA_PATH, API_URL)
+        case '2':
+            words_count = get_words_count(API_URL)
+            save_words_count(STORAGE_PATH, words_count)
+        case '3':
+            print('Not implemented')
 main()
+
+

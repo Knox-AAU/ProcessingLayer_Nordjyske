@@ -89,6 +89,5 @@ class TestParserGetParagraph(unittest.TestCase):
         self.assertEqual(result, [art2])
 
 
-
 if __name__ == '__main__':
     unittest.main()

@@ -42,6 +42,10 @@ def console_confirmation():
     else:
         sys.exit()
 
-def print_all_done():
-    print(f'{ConColors.GREEN}All done')
-        
+def print_menu():
+    print(f'{ConColors.MAGENTA}Welcome{ConColors.WHITE}')
+    print('Please select an option by typing its number:')
+    print(f'{ConColors.BLUE}1{ConColors.WHITE}. Insert all articles to database')
+    print(f'{ConColors.BLUE}2{ConColors.WHITE}. Generate word vecs')
+    print(f'{ConColors.BLUE}3{ConColors.WHITE}. Do clustering and nearest articles')
+    return input()

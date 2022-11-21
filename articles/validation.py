@@ -2,7 +2,6 @@ from console import print_warning
 
 MAX_LEN = 100
 
-
 def is_valid(data):
     return (check_paragraphs(data) and
             check_for_attribute(data, 'headline') and
