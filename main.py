@@ -17,5 +17,3 @@ def main():
         case '3':
             print('Not implemented')
 main()
-
-
