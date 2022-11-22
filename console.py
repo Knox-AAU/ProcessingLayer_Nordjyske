@@ -35,8 +35,8 @@ def update_status_console(num_of_files, current_file, start_time):
         print(f'{ConColors.YELLOW}Warnings: ' + WARNING_TEXT)
 
 def confirmation_insert_arts():
-    print(f'{ConColors.MAGENTA}Are you sure you want to insert all articles in the directory?')
-    print(f'{ConColors.WHITE}Make sure the database does not have data in it')
+    print(f'{ConColors.MAGENTA}Are you sure you want to insert all articles to the database ?')
+    print(f'{ConColors.WHITE}Make sure you are using the right directory')
     input_str = input('Type "yes": ')
     if input_str != 'yes':
         sys.exit()
