@@ -1,6 +1,6 @@
 import unittest
 import math
-from article.find_nearest_document import get_neareast_docs
+from articles.find_nearest_document import get_neareast_docs
 
 class TestGetNearestDocument (unittest.TestCase):
     def test_get_nearest_document_2d(self):

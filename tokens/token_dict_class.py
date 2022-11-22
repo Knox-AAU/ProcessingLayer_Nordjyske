@@ -7,7 +7,14 @@ class TokenDict(dict):
             self[token] = {'amount': amount, 'rank': rank}
         else:
             self[token]['amount'] += amount
+
     def extend(self, dicts):
         for d in dicts:
             self.add(d, dicts[d]['amount'], dicts[d]['rank'])
+
+    def get_total_amount(self):
+        amount_sum = 0
+        for item in self.items():
+            amount_sum += item[1]['amount']
+        return amount_sum
             

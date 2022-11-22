@@ -1,6 +1,6 @@
 import unittest
 import json
-from article.validation import is_valid
+from articles.validation import is_valid
 
 class TestValidation(unittest.TestCase):
 

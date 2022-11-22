@@ -1,7 +1,7 @@
 import unittest
-from article.article_class import ArticleClass
-from vec_words.extract_tokens import add_tokens_to_articles
-from vec_words.token_dict_class import TokenDict
+from articles.article_class import ArticleClass
+from tokens.extract_tokens import add_tokens_to_articles
+from tokens.token_dict_class import TokenDict
 
 class TestAddTokensToArticles(unittest.TestCase):
     def test_add_tokens_to_articles_general(self):

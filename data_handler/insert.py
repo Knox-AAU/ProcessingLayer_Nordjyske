@@ -7,9 +7,9 @@ SUBHEADER_SCALAR = 1.25
 
 def insert_articles_tokens(articles, api_url):
     for art in articles:
-        art.id = make_post(api_url+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
-        make_post(api_url+'document-contents', get_content_json(art))
-        make_post(api_url+'word-ratios', get_tokens_json(art))
+        art.id = http_post(api_url+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
+        http_post(api_url+'document-contents', get_content_json(art))
+        http_post(api_url+'word-ratios', get_tokens_json(art))
 
 def get_article_json(art):
     return [{
@@ -45,6 +45,7 @@ def get_content_json(art):
 
 def get_tokens_json(art):
     json_data = []
+    total_amount = art.tokens.get_total_amount()
     for token in art.tokens:
         if token != '':
             amount = art.tokens[token]['amount']
@@ -53,7 +54,7 @@ def get_tokens_json(art):
                 'documentId': art.id,
                 'word': token,
                 'amount': amount,
-                'percent': amount/len(art.tokens),
+                'percent': amount/total_amount,
                 'rank': rank,
                 'clusteringScore': get_score(amount, rank)
             })
@@ -67,7 +68,7 @@ def get_score(amount, rank):
     elif rank == 3:
         return amount
 
-def make_post(url, json_data):
+def http_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
     if r.status_code != 200:
         data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
