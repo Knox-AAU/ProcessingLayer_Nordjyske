@@ -11,6 +11,7 @@ from exceptions import HttpException
 
 def insert_arts_db(data_path, api_url):
     confirmation_insert_arts()
+
     start_time = datetime.now()
     try:
         files = get_files_data(data_path)
