@@ -1,7 +1,7 @@
 import requests
 from exceptions import HttpException
 
-GET_TIMEOUT = 5
+GET_TIMEOUT = 10
 
 def fetch_tokens(api_url, limit, offset):
     tokens = []
