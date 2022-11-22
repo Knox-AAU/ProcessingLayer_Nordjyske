@@ -15,6 +15,7 @@ class ConColors:
 def print_warning(msg):
     global WARNING_TEXT
     WARNING_TEXT += f'{ConColors.YELLOW}\nWARNING: {ConColors.WHITE}' + msg
+    print(WARNING_TEXT)
 
 def print_error(msg):
     print(f'{ConColors.RED}ERROR: {ConColors.WHITE}'+msg)
@@ -33,14 +34,17 @@ def update_status_console(num_of_files, current_file, start_time):
     if WARNING_TEXT != '':
         print(f'{ConColors.YELLOW}Warnings: ' + WARNING_TEXT)
 
-def console_confirmation():
+def confirmation_insert_arts():
     print(f'{ConColors.MAGENTA}Are you sure you want to insert all articles in the directory?')
     print(f'{ConColors.WHITE}Make sure the database does not have data in it')
     input_str = input('Type "yes": ')
-    if input_str == 'yes':
-        return
-    else:
+    if input_str != 'yes':
         sys.exit()
+
+def confirmation_get_new_vecs():
+    print('Do you want to get all new word vecs from the database?')
+    input_str = input('Type "yes" or "no": ')
+    return input_str == 'yes'
 
 def print_menu():
     print(f'{ConColors.MAGENTA}Welcome{ConColors.WHITE}')

@@ -1,5 +1,5 @@
-from data_handler.file_load_save import save_words_count
-from tokens.gen_vec_words import get_words_count
+from tokens.gen_vec_words import store_word_vecs_template
+from tokens.words_vecs import get_word_vecs
 from articles.articles_handler import insert_arts_db
 from console import print_menu
 
@@ -12,8 +12,7 @@ def main():
         case '1':
             insert_arts_db(DATA_PATH, API_URL)
         case '2':
-            words_count = get_words_count(API_URL)
-            save_words_count(STORAGE_PATH, words_count)
+            store_word_vecs_template(API_URL, STORAGE_PATH)
         case '3':
-            print('Not implemented')
+            get_word_vecs(API_URL, STORAGE_PATH)
 main()
