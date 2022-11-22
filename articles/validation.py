@@ -11,7 +11,6 @@ def is_valid(data):
             check_publisher(data) and
             check_len_for_all(data))
 
-
 def check_paragraphs(data):
     if 'paragraphs' not in data:
         return False
@@ -22,12 +21,10 @@ def check_paragraphs(data):
             return True
     return False
 
-
 def check_for_attribute(data, attribute):
     if attribute not in data or not is_valid_str(data[attribute]):
         return False
     return True
-
 
 def check_byline(data):
     if 'byline' not in data:
@@ -38,7 +35,6 @@ def check_byline(data):
         return False
     return True
 
-
 def check_publisher(data):
     if 'publisher' not in data or data['publisher'] != 'Nordjyske Medier':
         data = 'Headline: "' + data['headline'] + \
@@ -47,10 +43,8 @@ def check_publisher(data):
         return False
     return True
 
-
 def is_valid_str(var):
     return (isinstance(var, str) and len(var) > 0)
-
 
 def check_len_for_all(data):
     data_list = []

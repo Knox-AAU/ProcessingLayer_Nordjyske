@@ -1,6 +1,6 @@
 from data_handler.file_load_save import load_json_data, save_json_data
-from tokens.gen_vec_words import VECS_TEMPLATE_FILE_NAME
 from data_handler.fetch import fetch_article_count, fetch_word_vecs
+from tokens.gen_vec_words import VECS_TEMPLATE_FILE_NAME
 from console import print_warning, confirmation_get_new_vecs
 from exceptions import FileNotExistsException
 
@@ -10,7 +10,7 @@ VECS_FILE_NAME = 'word_vecs.json'
 def get_vecs_db(api_url, storage_path):
     print('Creating word vecs from database...')
     vecs_template = load_json_data(storage_path + VECS_TEMPLATE_FILE_NAME)
-    art_count = 100 # fetch_article_count(api_url)
+    art_count = fetch_article_count(api_url)
     word_vecs = []
     for i in range(int(art_count/SPLIT_LEN)):
         print('Processing ' + str(i+1) + ' of ' + str(int(art_count/SPLIT_LEN)))
