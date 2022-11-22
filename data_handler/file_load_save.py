@@ -28,3 +28,4 @@ def load_json_data(file_path):
             return json.load(f)
     else:
         raise FileNotExistsException('"' + file_path + '" does not exist')
+

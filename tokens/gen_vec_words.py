@@ -36,3 +36,4 @@ def remove_irrelevant(words_count):
     return Counter({k: c for k, c in words_count.items()
         if c >= REMOVE_COUNT_UNDER and c <= REMOVE_COUNT_OVER
         })
+    return Counter({k: c for k, c in words_count.items() if c >= REMOVE_COUNT_UNDER})
