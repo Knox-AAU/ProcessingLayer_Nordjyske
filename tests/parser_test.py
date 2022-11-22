@@ -1,6 +1,9 @@
 import unittest
 import json
-from article.json_parser import get_paragraph
+from articles import article_class
+from articles.json_parser import get_paragraph
+from articles.json_parser import remove_duplicates
+
 
 class TestParserGetParagraph(unittest.TestCase):
 
@@ -45,6 +48,45 @@ class TestParserGetParagraph(unittest.TestCase):
                     """
         data = json.loads(json_data)
         self.assertEqual(get_paragraph(data), (['sub1 ', 'sub2 '], ['']))
+
+    def test_is_duplicate(self):
+        arts = []
+        art = article_class.ArticleClass(
+            headline='headline1', publication='nordjyske', author_name='Søren')
+        art.data_id = 1
+        art.total_words = 5
+        arts.append(art)
+        arts.append(art)
+        result = remove_duplicates(arts)
+        self.assertTrue(len(result) == 1)
+
+    def test_is_not_duplicate(self):
+        arts = []
+        art1 = article_class.ArticleClass(
+            headline='headline1', publication='nordjyske', author_name='Søren')
+        art2 = article_class.ArticleClass(
+            headline='headline1', publication='nordjyske', author_name='Søren')
+        art1.data_id = 1
+        art2.data_id = 2
+        arts.append(art1)
+        arts.append(art2)
+        result = remove_duplicates(arts)
+        self.assertTrue(len(result)==2)
+        
+    def test_is_not_duplicate_2(self):
+        arts = []
+        art1 = article_class.ArticleClass(
+            headline='headline1', publication='nordjyske', author_name='Søren')
+        art2 = article_class.ArticleClass(
+            headline='headline1', publication='nordjyske', author_name='Søren')
+        art1.total_words = 3
+        art1.data_id = 1
+        art2.data_id = 1
+        art2.total_words = 5
+        arts.append(art1)
+        arts.append(art2)
+        result = remove_duplicates(arts)
+        self.assertEqual(result, [art2])
 
 
 if __name__ == '__main__':
