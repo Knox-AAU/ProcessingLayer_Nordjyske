@@ -15,4 +15,6 @@ def main():
             store_word_vecs_template(API_URL, STORAGE_PATH)
         case '3':
             get_word_vecs(API_URL, STORAGE_PATH)
+        case _:
+            print('Input was not correct')
 main()

@@ -36,7 +36,7 @@ def update_status_console(num_of_files, current_file, start_time):
 
 def confirmation_insert_arts():
     print(f'{ConColors.MAGENTA}Are you sure you want to insert all articles to the database ?')
-    print(f'{ConColors.WHITE}Make sure you are using the right directory')
+    print(f'{ConColors.WHITE}Make sure you have set the right directory')
     input_str = input('Type "yes": ')
     if input_str != 'yes':
         sys.exit()
@@ -49,7 +49,7 @@ def confirmation_get_new_vecs():
 def print_menu():
     print(f'{ConColors.MAGENTA}Welcome{ConColors.WHITE}')
     print('Please select an option by typing its number:')
-    print(f'{ConColors.BLUE}1{ConColors.WHITE}. Insert all articles to database')
-    print(f'{ConColors.BLUE}2{ConColors.WHITE}. Generate word vecs')
-    print(f'{ConColors.BLUE}3{ConColors.WHITE}. Do clustering and nearest articles')
+    print(f'{ConColors.BLUE}1.{ConColors.WHITE} Insert all articles to database')
+    print(f'{ConColors.BLUE}2.{ConColors.WHITE} Generate word vecs')
+    print(f'{ConColors.BLUE}3.{ConColors.WHITE} Do clustering and nearest articles')
     return input()
