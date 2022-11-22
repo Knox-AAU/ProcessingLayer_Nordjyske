@@ -15,6 +15,7 @@ def store_word_vecs_template(api_url, storage_path):
     print('Done getting vecs template. Highest word count: ' + str(words_count.most_common(1)[0]))
     words = remove_irrelevant(words_count)
     words = [v for v, c in words.most_common(SELECT_TOP)]
+    print('Saving word vecs template...')
     save_json_data(storage_path, VECS_TEMPLATE_FILE_NAME, words)
 
 def get_all_words_count(api_url):
@@ -36,4 +37,3 @@ def remove_irrelevant(words_count):
     return Counter({k: c for k, c in words_count.items()
         if c >= REMOVE_COUNT_UNDER and c <= REMOVE_COUNT_OVER
         })
-    return Counter({k: c for k, c in words_count.items() if c >= REMOVE_COUNT_UNDER})

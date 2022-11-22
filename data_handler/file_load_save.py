@@ -2,12 +2,6 @@ import json
 import os
 from exceptions import FileNotExistsException
 
-def save_word_vecs_template(path, data):
-    if not os.path.exists(path):
-        os.makedirs(path)
-    with open(path, 'w', encoding='utf-8') as outfile:
-        json.dump(data, outfile)
-
 def get_files_data(path):
     all_files = []
     files = os.listdir(path)
