@@ -1,11 +1,11 @@
-import json
 import re
 import os
 from articles.article_class import ArticleClass
 from articles.validation import is_valid
+from data_handler.file_load_save import load_json_data
 
 def get_parsed_articles(file_path):
-    data_objs = get_articles_data(file_path)
+    data_objs = load_json_data(file_path)['content']['articles']
     parsed_articles = []
     for data_obj in data_objs:
         if is_valid(data_obj):
@@ -55,8 +55,3 @@ def get_token_count(article):
 
 def get_token_re_pattern():
     return re.compile(r'[0-9]+,[0-9]+|[a-z0-9æøå]{2,}|[0-9]+')
-
-def get_articles_data(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    return data['content']['articles']
