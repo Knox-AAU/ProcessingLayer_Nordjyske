@@ -27,16 +27,16 @@ def labels_to_topics(labels, ids):
         topics.append({'id': doc_id, 'topic': label})
     return topics
 
-def test_clustering_for_range_n(array):
+def test_clustering_for_range_n(array, range_n):
     start_time = datetime.now()
     intertia = []
-    for i in range(1, 30):
+    for i in range(1, range_n):
         kmeans = KMeans(i)
         kmeans.fit(array)
         intertia.append(kmeans.inertia_)
         print(str(i) + 'n clustering time: ' + str(datetime.now() - start_time))
     print('Total time: ' + str(datetime.now() - start_time))
-    number_clusters = range(1, 30)
+    number_clusters = range(1, range_n)
     plt.plot(number_clusters, intertia)
     plt.title('The Elbow')
     plt.xlabel('Number of clusters')
