@@ -1,7 +1,7 @@
+from datetime import datetime
 from sklearn.cluster import KMeans
 import numpy as np
 import matplotlib.pyplot as plt
-from datetime import datetime
 
 N_CLUSTERS=14
 
@@ -31,11 +31,10 @@ def test_clustering_for_range_n(array):
     start_time = datetime.now()
     intertia = []
     for i in range(1, 30):
-        print("i: ", i)
         kmeans = KMeans(i)
         kmeans.fit(array)
         intertia.append(kmeans.inertia_)
-        print(i + 'n clustering time: ' + str(datetime.now() - start_time))
+        print(str(i) + 'n clustering time: ' + str(datetime.now() - start_time))
     print('Total time: ' + str(datetime.now() - start_time))
     number_clusters = range(1, 30)
     plt.plot(number_clusters, intertia)
