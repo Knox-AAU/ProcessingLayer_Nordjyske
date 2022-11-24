@@ -3,7 +3,8 @@ import numpy as np
 
 NEAREAST_DOCS_AMOUNT = 5
 
-def get_neareast_docs(id_and_word_count_arr):
+
+def get_nearest_docs(id_and_word_count_arr):
     nearest_docs_array = []
     for index, main_doc in enumerate(id_and_word_count_arr):
         id_main_doc = id_and_word_count_arr[index][0]
