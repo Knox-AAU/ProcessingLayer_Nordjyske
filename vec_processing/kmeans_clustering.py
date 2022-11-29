@@ -1,9 +1,8 @@
 from datetime import datetime
 from sklearn.cluster import KMeans
 import numpy as np
-import matplotlib.pyplot as plt
 
-N_CLUSTERS=14
+N_CLUSTERS=30
 
 def find_topics(word_vecs):
     start_time = datetime.now()
@@ -26,19 +25,3 @@ def labels_to_topics(labels, ids):
     for doc_id, label in zip(ids, labels):
         topics.append({'id': doc_id, 'topic': label})
     return topics
-
-def test_clustering_for_range_n(array, range_n):
-    start_time = datetime.now()
-    intertia = []
-    for i in range(1, range_n):
-        kmeans = KMeans(i)
-        kmeans.fit(array)
-        intertia.append(kmeans.inertia_)
-        print(str(i) + 'n clustering time: ' + str(datetime.now() - start_time))
-    print('Total time: ' + str(datetime.now() - start_time))
-    number_clusters = range(1, range_n)
-    plt.plot(number_clusters, intertia)
-    plt.title('The Elbow')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('Intertia')
-    plt.show()
