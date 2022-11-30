@@ -20,5 +20,5 @@ def split_2d_list(word_vecs):
 def labels_to_topics(labels, ids):
     topics = []
     for doc_id, label in zip(ids, labels):
-        topics.append({'id': doc_id, 'topic': label})
+        topics.append({'id': doc_id, 'topic': int(label)})
     return {'n_clusters': N_CLUSTERS, 'topics': topics}
