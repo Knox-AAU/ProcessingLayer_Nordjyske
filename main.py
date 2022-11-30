@@ -1,10 +1,8 @@
 from tokens.gen_vec_words import store_word_vecs_template
 from tokens.words_vecs import get_word_vecs
 from articles.articles_handler import insert_arts_db
-from data_handler.insert import insert_category_amount
-from data_handler.update import update_document_category
 from console import print_menu
-from vec_processing.kmeans_clustering import find_topics
+from vec_processing.topics_nearest_doc import store_topics_nearest_docs, insert_categorys, insert_nearest_docs
 
 DATA_PATH = 'jsonTestData/'
 STORAGE_PATH = 'storage_data/'
@@ -18,9 +16,10 @@ def main():
             store_word_vecs_template(API_URL, STORAGE_PATH)
         case '3':
             word_vecs = get_word_vecs(API_URL, STORAGE_PATH)
-            topics = find_topics(word_vecs)
-            insert_category_amount(API_URL)
-            update_document_category(API_URL, topics)
+            store_topics_nearest_docs(word_vecs, STORAGE_PATH)
+        case '4':
+            insert_categorys(API_URL, STORAGE_PATH)
+            insert_nearest_docs(API_URL, STORAGE_PATH)
         case _:
             print('Input was not correct')
 main()

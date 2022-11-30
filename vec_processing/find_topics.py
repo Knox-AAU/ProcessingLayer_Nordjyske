@@ -5,6 +5,7 @@ import numpy as np
 N_CLUSTERS=30
 
 def find_topics(word_vecs):
+    print('Start clustering...')
     start_time = datetime.now()
     vecs, ids = split_2d_list(word_vecs)
     array = np.array(vecs)
@@ -24,4 +25,4 @@ def labels_to_topics(labels, ids):
     topics = []
     for doc_id, label in zip(ids, labels):
         topics.append({'id': doc_id, 'topic': label})
-    return topics
+    return {'n_clusters': N_CLUSTERS, 'topics': topics}

@@ -1,6 +1,5 @@
 import requests
 from exceptions import HttpException
-from vec_processing.kmeans_clustering import N_CLUSTERS
 
 POST_TIMEOUT = 1.5
 HEADLINE_SCALAR = 1.5
@@ -13,9 +12,9 @@ def insert_articles_tokens(articles, api_url):
         http_post(api_url+'document-contents', make_content_json(art))
         http_post(api_url+'word-ratios', make_tokens_json(art))
 
-def insert_category_amount(api_url):
-    for i in range(N_CLUSTERS):
-        http_post(api_url+'categories/', '')
+def insert_category_amount(api_url, n_clusters):
+    for i in range(1, n_clusters+1):
+        http_post(api_url+'categories?name=noName'+str(i), '')
 
 def make_article_json(art):
     return [{
