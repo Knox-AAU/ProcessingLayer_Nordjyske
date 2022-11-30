@@ -27,6 +27,7 @@ def get_vecs_storage(api_url, storage_path):
         return get_vecs_db(api_url, storage_path)
 
 def get_word_vecs(api_url, storage_path):
+    print('Getting word vecs from storage...')
     if confirmation_get_new_vecs():
         return get_vecs_db(api_url, storage_path)
     else:

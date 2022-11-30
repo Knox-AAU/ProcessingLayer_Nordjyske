@@ -1,3 +1,4 @@
+from datetime import datetime
 from data_handler.fetch import fetch_changeable_categories
 from data_handler.update import update_document_category
 from data_handler.insert import insert_category_amount
@@ -11,12 +12,17 @@ TOPICS_FILE_NAME = 'topics.json'
 NEAREAST_DOCS_FILE_NAME = 'neareast_docs.json'
 
 def store_topics_nearest_docs(word_vecs, storage_path):
+    start_time = datetime.now()
+    print('Start clustering...')
     topics = find_topics(word_vecs)
     print('Saving topics...')
     save_json_data(storage_path, TOPICS_FILE_NAME, topics)
+    print('Topics made and saved in: ' + str(datetime.now() - start_time))
+    print('Finding nearest articles...')
     neareast_docs = get_neareast_arts(word_vecs)
     print('Saving neareast docs...')
     save_json_data(storage_path, NEAREAST_DOCS_FILE_NAME, neareast_docs)
+    print('Total time: ' + str(datetime.now() - start_time))
 
 def insert_categorys(api_url, storage_path):
     topics_data = load_json_data(storage_path+TOPICS_FILE_NAME)
