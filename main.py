@@ -1,6 +1,8 @@
 from tokens.gen_vec_words import store_word_vecs_template
 from tokens.words_vecs import get_word_vecs
 from articles.articles_handler import insert_arts_db
+from data_handler.insert import insert_category_amount
+from data_handler.update import update_document_category
 from console import print_menu
 from vec_processing.kmeans_clustering import find_topics
 
@@ -17,7 +19,8 @@ def main():
         case '3':
             word_vecs = get_word_vecs(API_URL, STORAGE_PATH)
             topics = find_topics(word_vecs)
-            print(topics)
+            insert_category_amount(API_URL)
+            update_document_category(API_URL, topics)
         case _:
             print('Input was not correct')
 main()
