@@ -12,10 +12,10 @@ def perform_clustering_testing(word_vecs):
     vecs, ids = split_2d_list(word_vecs)
     vec_matrix = np.array(vecs)
     find_silhouette_for_range_n(vec_matrix, MAX_N_RANGE)
-    clustering_for_range_n(vec_matrix, MAX_N_RANGE)
+    find_elbow_for_range_n(vec_matrix, MAX_N_RANGE)
     print('Total time: ' + str(datetime.now() - start_time))
 
-def clustering_for_range_n(array, range_n):
+def find_elbow_for_range_n(array, range_n):
     start_time = datetime.now()
     intertia = []
     for i in range(1, range_n):

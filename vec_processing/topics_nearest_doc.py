@@ -1,8 +1,8 @@
 from datetime import datetime
-from data_handler.fetch import fetch_changeable_categories
+from data_handler.fetch import fetch_editable_categories
 from data_handler.update import update_document_category
 from data_handler.insert import insert_category_amount
-from data_handler.delete import delete_categorys
+from data_handler.delete import delete_categories
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_nearest_arts
@@ -26,15 +26,15 @@ def store_topics_nearest_docs(word_vecs, storage_path):
     save_json_data(storage_path, NEAREAST_DOCS_FILE_NAME, neareast_docs)
     print('Total time: ' + str(datetime.now() - start_time))
 
-def insert_categorys(api_url, storage_path):
+def insert_topics(api_url, storage_path):
     topics_data = load_json_data(storage_path+TOPICS_FILE_NAME)
     n_clusters = topics_data['n_clusters']
     topics = topics_data['topics']
-    db_ids = fetch_changeable_categories(api_url)
+    db_ids = fetch_editable_categories(api_url)
     if len(db_ids) != n_clusters:
         print_warning('Categories in database does not have to same length as the stored topics')
         if confirmation_insert_new_categories():
-            delete_categorys(api_url, db_ids)
+            delete_categories(api_url, db_ids)
             insert_category_amount(api_url, n_clusters)
         else:
             return
@@ -43,7 +43,7 @@ def insert_categorys(api_url, storage_path):
 def set_documents_topics(api_url, topics):
     text = 'Updating category on documents in db...'
     print(text)
-    db_ids = fetch_changeable_categories(api_url)
+    db_ids = fetch_editable_categories(api_url)
     start_time = datetime.now()
     for index, topic in enumerate(update_topics(topics, db_ids)):
         if index % (len(topics)/100) == 0: # for a slow printout
@@ -52,10 +52,10 @@ def set_documents_topics(api_url, topics):
     print(f'Category on {len(topics)} documents updated')
 
 def update_topics(topics, db_ids):
-    categorys = []
+    categories = []
     for topic in topics:
-        categorys.append({'id': topic['id'], 'category': db_ids[topic['topic']]})
-    return categorys
+        categories.append({'id': topic['id'], 'category': db_ids[topic['topic']]})
+    return categories
 
 def insert_nearest_docs(api_url, storage_path):
     print('not implemented')

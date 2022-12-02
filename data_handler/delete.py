@@ -3,7 +3,7 @@ from exceptions import HttpException
 
 DELETE_TIMEOUT = 5
 
-def delete_categorys(api_url, ids):
+def delete_categories(api_url, ids):
     for id in ids:
         http_delete(api_url + 'categories/' + str(id))
 
