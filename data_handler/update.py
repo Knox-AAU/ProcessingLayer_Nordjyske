@@ -15,14 +15,6 @@ def update_document_category(api_url, topics):
         }
         http_put(api_url + 'documents/category', data)
 
-def update_categorys_to_default(api_url, art_count, start_id):
-    for i in range(art_count):
-        data = {
-            'documentId': start_id+i,
-            'categoryId': 1
-        }
-        http_put(api_url + 'documents/category', data)
-
 def http_put_no_args(url):
     r = requests.put(url, timeout=PUT_TIMEOUT)
     if r.status_code != 200:

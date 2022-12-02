@@ -19,12 +19,10 @@ def fetch_changeable_categories(api_url):
             ids.append(category['id'])
     return ids
 
-def fetch_documents(api_url, limit, offset):
-    return http_get(api_url + 'documents?limit=' + str(limit) + '&offset=' + str(offset))
-
 def fetch_word_vecs(api_url, limit, offset, vecs_template):
     all_word_vecs = []
-    for doc in fetch_documents(api_url, limit, offset):
+    documents = http_get(api_url + 'documents?limit=' + str(limit) + '&offset=' + str(offset))
+    for doc in documents:
         word_vecs = []
         words = http_get(api_url + 'word-ratios/documents/' + str(doc['id']))
         for t_word in vecs_template:

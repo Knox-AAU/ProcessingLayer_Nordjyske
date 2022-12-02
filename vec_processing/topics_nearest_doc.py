@@ -1,6 +1,6 @@
 from datetime import datetime
-from data_handler.fetch import fetch_changeable_categories, fetch_article_count, fetch_documents
-from data_handler.update import update_document_category, update_categorys_to_default
+from data_handler.fetch import fetch_changeable_categories
+from data_handler.update import update_document_category
 from data_handler.insert import insert_category_amount
 from data_handler.delete import delete_categorys
 from data_handler.file_load_save import save_json_data, load_json_data
@@ -35,20 +35,11 @@ def insert_categorys(api_url, storage_path):
     if len(db_ids) != topics:
         print_warning('Categories in database does not have to same length as the stored topics')
         if confirmation_insert_new_categories():
-            reset_categorys(api_url, db_ids, n_clusters)
+            delete_categorys(api_url, db_ids)
+            insert_category_amount(api_url, n_clusters)
         else:
             return
     update_document_category(api_url, update_topics(topics))
-
-def reset_categorys(api_url, db_ids, n_clusters):
-    art_count = fetch_article_count(api_url)
-    first_art_id = fetch_documents(api_url, 1, 0)[0]['id']
-    try:
-        update_categorys_to_default(api_url, art_count, first_art_id)
-    except HttpException as e:
-        print_warning(f'Article skipped: {e}')
-    delete_categorys(api_url, db_ids)
-    insert_category_amount(api_url, n_clusters)
 
 def update_topics(topics, db_ids):
     new_topics = []
