@@ -7,7 +7,6 @@ from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_neareast_arts
 from console import print_warning, confirmation_insert_new_categories, print_process_percent
-from exceptions import HttpException
 
 NEAREAST_ARTS_AMOUNT = 5
 
@@ -47,7 +46,7 @@ def set_documents_topics(api_url, topics):
     db_ids = fetch_changeable_categories(api_url)
     start_time = datetime.now()
     for index, topic in enumerate(update_topics(topics, db_ids)):
-        if index % (len(topics)/100):
+        if index % (len(topics)/100) == 0: # for a slow printout
             print_process_percent(text, index+1, len(topics), start_time)
         update_document_category(api_url, topic)
     print(f'Category on {len(topics)} documents updated')
