@@ -1,24 +1,23 @@
 import unittest
-import logging
-import sys
 from vec_processing.topics_nearest_doc import update_topics
-
 
 class TestTopicsNearestDoc(unittest.TestCase):
     def test_update_topics(self):
-        topics = [{'id': 1, 'topic': 0},
-                  {'id': 1, 'topic': 1},
-                  {'id': 1, 'topic': 2},
-                  {'id': 1, 'topic': 1},
-                  {'id': 1, 'topic': 3}
-                  ]
+        topics = [
+            {'id': 1, 'topic': 0},
+            {'id': 1, 'topic': 1},
+            {'id': 1, 'topic': 2},
+            {'id': 1, 'topic': 1},
+            {'id': 1, 'topic': 3}
+        ]
         db_ids = [1, 5, 77, 2]
-        self.assertEqual(update_topics(topics, db_ids),
-                         [{'id': 1, 'topic': 1},
-                         {'id': 1, 'topic': 5},
-                         {'id': 1, 'topic': 77},
-                         {'id': 1, 'topic': 5},
-                         {'id': 1, 'topic': 2}])
+        self.assertEqual(update_topics(topics, db_ids), [
+            {'id': 1, 'topic': 1},
+            {'id': 1, 'topic': 5},
+            {'id': 1, 'topic': 77},
+            {'id': 1, 'topic': 5},
+            {'id': 1, 'topic': 2}
+        ])
 
     def test_update_topics_no_match(self):
         topics = [{'id': 1, 'topic': 4}]
@@ -26,9 +25,5 @@ class TestTopicsNearestDoc(unittest.TestCase):
         with self.assertRaises(IndexError):
             update_topics(topics, db_ids)
 
-
 if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr)
-    logging.getLogger(
-        "TestTopicsNearestDoc.test_multi_update_topics").setLevel(logging.DEBUG)
     unittest.main()

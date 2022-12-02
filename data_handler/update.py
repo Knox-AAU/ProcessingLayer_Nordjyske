@@ -13,7 +13,6 @@ def update_document_category(api_url, topic):
         'categoryId': topic['category']
     }
     http_put(api_url + 'documents/category', data)
->>>>>>> main
 
 def http_put_no_args(url):
     r = requests.put(url, timeout=PUT_TIMEOUT)
