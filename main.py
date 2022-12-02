@@ -8,6 +8,7 @@ DATA_PATH = 'jsonTestData/'
 STORAGE_PATH = 'storage_data/'
 API_URL = 'http://localhost:5501/document-data-api/'
 
+
 def main():
     match print_menu():
         case '1':
@@ -22,4 +23,6 @@ def main():
             insert_nearest_docs(API_URL, STORAGE_PATH)
         case _:
             print('Input was not correct')
+
+
 main()
