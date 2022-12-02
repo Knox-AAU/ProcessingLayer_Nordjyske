@@ -6,7 +6,7 @@ from data_handler.delete import delete_categorys
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_neareast_arts
-from console import print_warning, confirmation_insert_new_categories
+from console import print_warning, confirmation_insert_new_categories, print_process_percent
 from exceptions import HttpException
 
 NEAREAST_ARTS_AMOUNT = 5
@@ -32,22 +32,31 @@ def insert_categorys(api_url, storage_path):
     n_clusters = topics_data['n_clusters']
     topics = topics_data['topics']
     db_ids = fetch_changeable_categories(api_url)
-    if len(db_ids) != topics:
+    if len(db_ids) != n_clusters:
         print_warning('Categories in database does not have to same length as the stored topics')
         if confirmation_insert_new_categories():
             delete_categorys(api_url, db_ids)
             insert_category_amount(api_url, n_clusters)
         else:
             return
-    print('Updating category on documents in db...')
-    update_document_category(api_url, update_topics(topics, api_url))
+    set_documents_topics(api_url, topics)
 
-def update_topics(topics, api_url):
+def set_documents_topics(api_url, topics):
+    text = 'Updating category on documents in db...'
+    print(text)
     db_ids = fetch_changeable_categories(api_url)
-    new_topics = []
+    start_time = datetime.now()
+    for index, topic in enumerate(update_topics(topics, db_ids)):
+        if index % (len(topics)/100):
+            print_process_percent(text, index+1, len(topics), start_time)
+        update_document_category(api_url, topic)
+    print(f'Category on {len(topics)} documents updated')
+
+def update_topics(topics, db_ids):
+    categorys = []
     for topic in topics:
-        new_topics.append({'id': topic['id'], 'category': db_ids[topic['topic']]})
-    return new_topics
+        categorys.append({'id': topic['id'], 'category': db_ids[topic['topic']]})
+    return categorys
 
 def insert_nearest_docs(api_url, storage_path):
     print('not implemented')
