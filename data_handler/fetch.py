@@ -11,6 +11,14 @@ def fetch_tokens(api_url, limit, offset):
             tokens.append(word_ratio['word'])
     return tokens
 
+def fetch_editable_categories(api_url):
+    ids = []
+    categories = http_get(api_url + 'categories')
+    for category in categories:
+        if category['id'] != 1:
+            ids.append(category['id'])
+    return ids
+
 def fetch_word_vecs(api_url, limit, offset, vecs_template):
     all_word_vecs = []
     documents = http_get(api_url + 'documents?limit=' + str(limit) + '&offset=' + str(offset))
@@ -33,7 +41,7 @@ def fetch_article_count(api_url):
 def http_get(url):
     r = requests.get(url, timeout=GET_TIMEOUT)
     if r.status_code != 200:
-        raise HttpException('Post. Code: ' + str(r.status_code) + ' || Response: ' + r.text)
+        raise HttpException('Get. Code: ' + str(r.status_code) + ' || Response: ' + r.text)
     else:
         return r.json()
     

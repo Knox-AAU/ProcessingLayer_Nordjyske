@@ -1,9 +1,8 @@
 import unittest
 from articles.article_class import ArticleClass
 from tokens.token_dict_class import TokenDict
-from data_handler.insert import get_content_json
-from data_handler.insert import get_tokens_json
-
+from data_handler.insert import make_content_json
+from data_handler.insert import make_tokens_json
 
 class TestInsertArticles(unittest.TestCase):
     def test_get_content_json(self):
@@ -15,7 +14,7 @@ class TestInsertArticles(unittest.TestCase):
             'index': 0,
             'content': 'This is body text.'
         }]
-        self.assertEqual(get_content_json(art), expected_output)
+        self.assertEqual(make_content_json(art), expected_output)
 
 class TestInsertTokens(unittest.TestCase):
     def test_get_tokens_json_body_text(self):
@@ -50,7 +49,7 @@ class TestInsertTokens(unittest.TestCase):
             'rank': 3,
             'clusteringScore': 1
         }]
-        self.assertEqual(get_tokens_json(art), expected_output)
+        self.assertEqual(make_tokens_json(art), expected_output)
 
     def test_get_tokens_json_all(self):
         art = ArticleClass('headline', 'publication', 'name')
@@ -84,8 +83,7 @@ class TestInsertTokens(unittest.TestCase):
             'rank': 3,
             'clusteringScore': 6
         }]
-        self.assertEqual(get_tokens_json(art), expected_output)
-
+        self.assertEqual(make_tokens_json(art), expected_output)
 
 if __name__ == '__main__':
     unittest.main()

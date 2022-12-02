@@ -7,11 +7,16 @@ SUBHEADER_SCALAR = 1.25
 
 def insert_articles_tokens(articles, api_url):
     for art in articles:
-        art.id = http_post(api_url+'documents', get_article_json(art))[0] # get the first id. Only one article is inserted so only one id will be returned
-        http_post(api_url+'document-contents', get_content_json(art))
-        http_post(api_url+'word-ratios', get_tokens_json(art))
+        # vvv get the first id. Only one article is inserted so only one id will be returned
+        art.id = http_post(api_url+'documents', make_article_json(art))[0]
+        http_post(api_url+'document-contents', make_content_json(art))
+        http_post(api_url+'word-ratios', make_tokens_json(art))
 
-def get_article_json(art):
+def insert_category_amount(api_url, n_clusters):
+    for i in range(1, n_clusters+1):
+        http_post(api_url+'categories?name=noName'+str(i), '')
+
+def make_article_json(art):
     return [{
         'sourceId': 1,
         'categoryId': 1,
@@ -24,7 +29,7 @@ def get_article_json(art):
         'uniqueWords': len(art.tokens)
     }]
 
-def get_content_json(art):
+def make_content_json(art):
     if len(art.sub_head) == 0:
         return [{
             'documentId': art.id,
@@ -43,7 +48,15 @@ def get_content_json(art):
                 })
         return json_data
 
-def get_tokens_json(art):
+def make_tokens_json(art):
+    def get_score(amount, rank):
+        if rank == 1:
+            return amount*HEADLINE_SCALAR
+        elif rank == 2:
+            return amount*SUBHEADER_SCALAR
+        elif rank == 3:
+            return amount
+
     json_data = []
     total_amount = art.tokens.get_total_amount()
     for token in art.tokens:
@@ -59,14 +72,6 @@ def get_tokens_json(art):
                 'clusteringScore': get_score(amount, rank)
             })
     return json_data
-
-def get_score(amount, rank):
-    if rank == 1:
-        return amount*HEADLINE_SCALAR
-    elif rank == 2:
-        return amount*SUBHEADER_SCALAR
-    elif rank == 3:
-        return amount
 
 def http_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
