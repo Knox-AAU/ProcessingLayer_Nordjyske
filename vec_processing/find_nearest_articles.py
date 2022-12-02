@@ -3,7 +3,7 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 from vec_processing.find_topics import split_2d_list
 
-def get_neareast_arts(word_vecs, neighbors):
+def get_nearest_arts(word_vecs, neighbors):
     nearest_arts = []
     vecs, ids = split_2d_list(word_vecs)
     nbrs = NearestNeighbors(n_neighbors=neighbors+1, algorithm='ball_tree').fit(vecs)

@@ -5,7 +5,7 @@ from data_handler.insert import insert_category_amount
 from data_handler.delete import delete_categorys
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
-from vec_processing.find_nearest_articles import get_neareast_arts
+from vec_processing.find_nearest_articles import get_nearest_arts
 from console import print_warning, confirmation_insert_new_categories, print_process_percent
 
 NEAREAST_ARTS_AMOUNT = 5
@@ -21,7 +21,7 @@ def store_topics_nearest_docs(word_vecs, storage_path):
     save_json_data(storage_path, TOPICS_FILE_NAME, topics)
     print('Topics made and saved in: ' + str(datetime.now() - start_time))
     print('Finding nearest articles...')
-    neareast_docs = get_neareast_arts(word_vecs, NEAREAST_ARTS_AMOUNT)
+    neareast_docs = get_nearest_arts(word_vecs, NEAREAST_ARTS_AMOUNT)
     print('Saving neareast docs...')
     save_json_data(storage_path, NEAREAST_DOCS_FILE_NAME, neareast_docs)
     print('Total time: ' + str(datetime.now() - start_time))
