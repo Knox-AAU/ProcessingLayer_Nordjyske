@@ -39,9 +39,11 @@ def insert_categorys(api_url, storage_path):
             insert_category_amount(api_url, n_clusters)
         else:
             return
-    update_document_category(api_url, update_topics(topics))
+    print('Updating category on documents in db...')
+    update_document_category(api_url, update_topics(topics, api_url))
 
-def update_topics(topics, db_ids):
+def update_topics(topics, api_url):
+    db_ids = fetch_changeable_categories(api_url)
     new_topics = []
     for topic in topics:
         new_topics.append({'id': topic['id'], 'category': db_ids[topic['topic']]})

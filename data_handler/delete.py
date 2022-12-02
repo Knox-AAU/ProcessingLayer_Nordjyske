@@ -11,6 +11,4 @@ def http_delete(url):
     r = requests.delete(url, timeout=DELETE_TIMEOUT)
     if r.status_code != 200:
         raise HttpException('Post. Code: ' + str(r.status_code) + ' || Response: ' + r.text)
-    else:
-        return r.json()
     
