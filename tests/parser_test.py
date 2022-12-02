@@ -3,6 +3,7 @@ import json
 from articles import article_class
 from articles.json_parser import get_paragraph
 from articles.json_parser import remove_duplicates
+from articles.json_parser import get_token_count
 
 
 class TestParserGetParagraph(unittest.TestCase):
@@ -71,8 +72,8 @@ class TestParserGetParagraph(unittest.TestCase):
         arts.append(art1)
         arts.append(art2)
         result = remove_duplicates(arts)
-        self.assertTrue(len(result)==2)
-        
+        self.assertTrue(len(result) == 2)
+
     def test_is_not_duplicate_2(self):
         arts = []
         art1 = article_class.ArticleClass(
@@ -88,6 +89,28 @@ class TestParserGetParagraph(unittest.TestCase):
         result = remove_duplicates(arts)
         self.assertEqual(result, [art2])
 
+    def test_get_token_count_no_count(self):
+        art = article_class.ArticleClass(
+            headline='', publication='publication', author_name='name')
+        art.body_text = ''
+        art.sub_head = ''
+        actual_token_count = 0
+        self.assertEqual(get_token_count(art), actual_token_count)
+
+    def test_parameterized_get_token_count(self):
+        art = article_class.ArticleClass(
+            headline='headline', publication='publication', author_name='name')
+        param_list = [('ming', 'mang', 3),
+                      ('ming ming', 'mang', 4),
+                      ('mingmang', '', 2),
+                      ('', 'mingmang', 2),
+                      ('', '', 1),
+                      ('i', 'i', 1)]
+        for body_text, sub_head, expected_count in param_list:
+            with self.subTest():
+                art.body_text = body_text
+                art.sub_head = sub_head
+                self.assertEqual(get_token_count(art), expected_count)
 
 if __name__ == '__main__':
     unittest.main()
