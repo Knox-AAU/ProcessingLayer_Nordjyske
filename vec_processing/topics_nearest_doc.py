@@ -46,7 +46,7 @@ def set_documents_topics(api_url, topics):
     db_ids = fetch_editable_categories(api_url)
     start_time = datetime.now()
     for index, topic in enumerate(update_topics(topics, db_ids)):
-        if index % (len(topics)/100) == 0: # for a slow printout
+        if index % (len(topics)/400) == 0: # for a slow printout
             print_process_percent(text, index+1, len(topics), start_time)
         update_document_category(api_url, topic)
     print(f'Category on {len(topics)} documents updated')

@@ -56,7 +56,7 @@ def confirmation_insert_new_categories():
 def print_process_percent(top_msg, current, max_num, start_time):
     os.system('cls')
     print(top_msg)
-    print(f'{ConColors.BLUE}Processing {(current/max_num)*100}% done')
+    print(f'{ConColors.BLUE}Processing {round((current/max_num)*100, 3)}% done')
     print(f'{ConColors.WHITE}Time passed: {datetime.now() - start_time}')
 
 def print_menu():
