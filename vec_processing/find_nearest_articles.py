@@ -1,6 +1,4 @@
-from operator import itemgetter
 from sklearn.neighbors import NearestNeighbors
-import numpy as np
 from vec_processing.find_topics import split_2d_list
 
 def get_nearest_arts(word_vecs, neighbors):
