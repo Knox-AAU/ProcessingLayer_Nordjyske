@@ -1,8 +1,8 @@
 from datetime import datetime
 from data_handler.fetch import fetch_editable_categories
 from data_handler.update import update_document_category
-from data_handler.insert import insert_category_amount
-from data_handler.delete import delete_categories
+from data_handler.insert import insert_category_amount, insert_nearest_arts
+from data_handler.delete import delete_categories, delete_nearest_arts
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_nearest_arts
@@ -57,4 +57,6 @@ def update_topics(topics, db_ids):
     return categories
 
 def insert_nearest_docs(api_url, storage_path):
-    print('not implemented')
+    nearest_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
+    delete_nearest_arts(api_url)
+    insert_nearest_arts(nearest_data, api_url)

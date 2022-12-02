@@ -16,6 +16,10 @@ def insert_category_amount(api_url, n_clusters):
     for i in range(1, n_clusters+1):
         http_post(api_url+'categories?name=noName'+str(i), '')
 
+def insert_nearest_arts(articles, api_url):
+    http_post(api_url+'document-data-api/similar-documents', articles)
+
+
 def make_article_json(art):
     return [{
         'sourceId': 1,
