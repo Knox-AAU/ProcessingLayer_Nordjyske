@@ -11,7 +11,6 @@ from exceptions import HttpException
 
 def insert_arts_db(data_path, api_url):
     confirmation_insert_arts()
-
     start_time = datetime.now()
     try:
         files = get_files_data(data_path)
@@ -23,7 +22,7 @@ def insert_arts_db(data_path, api_url):
         print_success(start_time, len(files))
         update_word_relevance(api_url)
     except HttpException as e:
-        print_error('HttpException: ' + str(e))
+        print_error(f'HttpException: {e}')
 
 def get_articles_tokens(files, start_time, data_path):
     articles = []

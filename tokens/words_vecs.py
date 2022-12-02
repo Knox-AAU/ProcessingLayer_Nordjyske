@@ -13,8 +13,9 @@ def get_vecs_db(api_url, storage_path):
     art_count = fetch_article_count(api_url)
     word_vecs = []
     for i in range(int(art_count/SPLIT_LEN)):
-        print('Processing ' + str(i+1) + ' of ' + str(int(art_count/SPLIT_LEN)))
-        word_vecs.extend(fetch_word_vecs(api_url, SPLIT_LEN, SPLIT_LEN*i, vecs_template))
+        print(f'Processing {i+1} of {int(art_count/SPLIT_LEN)}')
+        word_vecs.extend(fetch_word_vecs(
+            api_url, SPLIT_LEN, SPLIT_LEN*i, vecs_template))
     print('Saving word vecs...')
     save_json_data(storage_path, VECS_FILE_NAME, word_vecs)
     return word_vecs
