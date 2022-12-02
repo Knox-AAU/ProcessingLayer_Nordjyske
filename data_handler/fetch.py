@@ -11,7 +11,7 @@ def fetch_tokens(api_url, limit, offset):
             tokens.append(word_ratio['word'])
     return tokens
 
-def fetch_changeable_categories(api_url):
+def fetch_editable_categories(api_url):
     ids = []
     categories = http_get(api_url + 'categories')
     for category in categories:

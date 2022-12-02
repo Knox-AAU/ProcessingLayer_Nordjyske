@@ -53,6 +53,12 @@ def confirmation_insert_new_categories():
     input_str = input('Type "yes" or "no": ')
     return input_str == 'yes'
 
+def print_process_percent(top_msg, current, max_num, start_time):
+    os.system('cls')
+    print(top_msg)
+    print(f'{ConColors.BLUE}Processing {round((current/max_num)*100, 3)}% done')
+    print(f'{ConColors.WHITE}Time passed: {datetime.now() - start_time}')
+
 def print_menu():
     print(f'{ConColors.MAGENTA}Welcome{ConColors.WHITE}')
     print('Please select an option by typing its number:')
