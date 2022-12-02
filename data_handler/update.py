@@ -8,13 +8,20 @@ def update_word_relevance(api_url):
     http_put_no_args(api_url + 'tf-idf/update')
 
 def update_document_category(api_url, topics):
-
     for topic in topics:
         data = {
-            'id': topic['id'],
-            'categoryId': topic['topic']+1 #+1 because DB ids start from 1 and topics start from 0
+            'documentId': topic['id'],
+            'categoryId': topic['category']
         }
-        http_put(api_url + 'documents', data)
+        http_put(api_url + 'documents/category', data)
+
+def update_categorys_to_default(api_url, art_count, start_id):
+    for i in range(art_count):
+        data = {
+            'documentId': start_id+i,
+            'categoryId': 1
+        }
+        http_put(api_url + 'documents/category', data)
 
 def http_put_no_args(url):
     r = requests.put(url, timeout=PUT_TIMEOUT)
