@@ -21,4 +21,4 @@ def load_json_data(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
     else:
-        raise FileNotExistsException('"' + file_path + '" does not exist')
+        raise FileNotExistsException(f'"{file_path}" does not exist')

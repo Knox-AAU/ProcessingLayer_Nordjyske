@@ -13,7 +13,7 @@ def perform_clustering_testing(word_vecs):
     vec_matrix = np.array(vecs)
     find_silhouette_for_range_n(vec_matrix, MAX_N_RANGE)
     find_elbow_for_range_n(vec_matrix, MAX_N_RANGE)
-    print('Total time: ' + str(datetime.now() - start_time))
+    print(f'Total time: {datetime.now() - start_time}')
 
 def find_elbow_for_range_n(array, range_n):
     start_time = datetime.now()
@@ -22,8 +22,8 @@ def find_elbow_for_range_n(array, range_n):
         kmeans = KMeans(i)
         kmeans.fit(array)
         intertia.append(kmeans.inertia_)
-        print(str(i) + 'n clustering time: ' + str(datetime.now() - start_time))
-    print('Total time: ' + str(datetime.now() - start_time))
+        print(f'{i}n clustering time: {datetime.now() - start_time}')
+    print(f'Total time: {datetime.now() - start_time}')
     number_clusters = range(1, range_n)
     plt.plot(number_clusters, intertia)
     plt.title('The Elbow')
@@ -39,12 +39,7 @@ def find_silhouette_for_range_n(word_vecs, range_n):
         kmeans.fit(vecs)
         silhouette_avg = silhouette_score(vecs, kmeans.labels_)
         silhouette.append(silhouette_avg)
-        print(
-            'For n_clusters =',
-            i,
-            'The average silhouette_score is :',
-            silhouette_avg,
-        )
+        print(f'For n_clusters ={i}. The average silhouette_score is :{silhouette_avg}')
     number_clusters = range(2, range_n)
     plt.plot(number_clusters, silhouette)
     plt.title('Silhouette')
