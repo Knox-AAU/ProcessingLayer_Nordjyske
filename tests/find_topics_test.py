@@ -1,5 +1,5 @@
 import unittest
-from vec_processing.find_topics import split_2d_list
+from vec_processing.topics_nearest_doc import split_2d_list
 
 class TestKMeansClustering (unittest.TestCase):
     def test_split_2d_list(self):
