@@ -58,5 +58,5 @@ def update_topics(topics, db_ids):
 
 def insert_nearest_docs(api_url, storage_path):
     nearest_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
-    delete_nearest_arts(api_url)
+    #delete_nearest_arts(api_url) Fix plz
     insert_nearest_arts(nearest_data, api_url)

@@ -17,8 +17,7 @@ def insert_category_amount(api_url, n_clusters):
         http_post(api_url+'categories?name=noName'+str(i), '')
 
 def insert_nearest_arts(articles, api_url):
-    http_post(api_url+'document-data-api/similar-documents', articles)
-
+    http_post(api_url+'similar-documents', articles)
 
 def make_article_json(art):
     return [{
