@@ -79,8 +79,8 @@ def make_tokens_json(art):
 def http_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
     if r.status_code not in (200, 204):
-        data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
-        raise HttpException('Post. Code: ' + str(r.status_code) + data)
-    else: 
+        data = f'|| Response: {r.text} || Data: {json_data}'
+        raise HttpException(f'Post. Code: {r.status_code}{data}')
+    else:
         if r.text != '':
             return r.json()
