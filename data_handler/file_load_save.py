@@ -2,7 +2,7 @@ import json
 import os
 from exceptions import FileNotExistsException
 
-def get_files_data(path):
+def get_files(path):
     all_files = []
     files = os.listdir(path)
     for (root, dirs, files) in os.walk(path):
@@ -21,4 +21,4 @@ def load_json_data(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
     else:
-        raise FileNotExistsException('"' + file_path + '" does not exist')
+        raise FileNotExistsException(f'"{file_path}" does not exist')

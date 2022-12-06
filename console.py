@@ -18,21 +18,21 @@ def print_warning(msg):
     print(WARNING_TEXT)
 
 def print_error(msg):
-    print(f'{ConColors.RED}ERROR: {ConColors.WHITE}'+msg)
+    print(f'{ConColors.RED}ERROR: {ConColors.WHITE}{msg}')
 
 def print_success(start_time, num_of_files):
     os.system('cls')
-    info = str(num_of_files) + ' files where added in ' + str(datetime.now() - start_time)
-    print(f'{ConColors.GREEN}SUCCESS \n{ConColors.WHITE}' + info)
+    info = f'{num_of_files} files where added in {datetime.now() - start_time}'
+    print(f'{ConColors.GREEN}SUCCESS \n{ConColors.WHITE} {info}')
     if WARNING_TEXT != '':
-        print(f'{ConColors.YELLOW}Warnings: ' + WARNING_TEXT)
+        print(f'{ConColors.YELLOW}Warnings: {WARNING_TEXT}')
 
 def update_status_console(num_of_files, current_file, start_time):
     os.system('cls')
-    print(f'{ConColors.BLUE}File ' + str(current_file) + ' of ' + str(num_of_files))
-    print(f'{ConColors.WHITE}Time passed: ' + str(datetime.now() - start_time))
+    print(f'{ConColors.BLUE}File {current_file} of {num_of_files}')
+    print(f'{ConColors.WHITE}Time passed: {datetime.now() - start_time}')
     if WARNING_TEXT != '':
-        print(f'{ConColors.YELLOW}Warnings: ' + WARNING_TEXT)
+        print(f'{ConColors.YELLOW}Warnings: {WARNING_TEXT}')
 
 def confirmation_insert_arts():
     print(f'{ConColors.MAGENTA}Are you sure you want to insert all articles to the database ?')

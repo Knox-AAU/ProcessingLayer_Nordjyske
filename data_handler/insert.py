@@ -81,5 +81,6 @@ def http_post(url, json_data):
     if r.status_code not in (200, 204):
         data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
         raise HttpException('Post. Code: ' + str(r.status_code) + data)
-    if r.text != '':
-        return r.json()
+    else: 
+        if r.text != '':
+            return r.json()

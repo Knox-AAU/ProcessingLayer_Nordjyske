@@ -17,14 +17,14 @@ def update_document_category(api_url, topic):
 def http_put_no_args(url):
     r = requests.put(url, timeout=PUT_TIMEOUT)
     if r.status_code != 200:
-        raise HttpException('Put. Code: ' + str(r.status_code) + '|| Response: ' + r.text)
+        raise HttpException(f'Put. Code: {r.status_code} || Response: {r.text}')
     else:
         return r.text
 
 def http_put(url, json_data):
     r = requests.put(url, json=json_data, timeout=PUT_TIMEOUT)
     if r.status_code != 200:
-        data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
-        raise HttpException('Put. Code: ' + str(r.status_code) + data)
+        data = f'|| Response: {r.text} || Data: {json_data}'
+        raise HttpException(f'Put. Code: {r.status_code}{data}')
     else:
         return r.text

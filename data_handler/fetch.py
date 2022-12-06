@@ -5,7 +5,7 @@ GET_TIMEOUT = 10
 
 def fetch_tokens(api_url, limit, offset):
     tokens = []
-    word_ratios = http_get(api_url + 'word-ratios?limit=' + str(limit) + '&offset=' + str(offset))
+    word_ratios = http_get(f'{api_url}word-ratios?limit={limit}&offset={offset}')
     for word_ratio in word_ratios:
         for a in range(word_ratio['amount']):
             tokens.append(word_ratio['word'])
@@ -21,10 +21,10 @@ def fetch_editable_categories(api_url):
 
 def fetch_word_vecs(api_url, limit, offset, vecs_template):
     all_word_vecs = []
-    documents = http_get(api_url + 'documents?limit=' + str(limit) + '&offset=' + str(offset))
+    documents = http_get(f'{api_url}documents?limit={limit}&offset={offset}')
     for doc in documents:
         word_vecs = []
-        words = http_get(api_url + 'word-ratios/documents/' + str(doc['id']))
+        words = http_get(f'{api_url}word-ratios/documents/' + doc['id'])
         for t_word in vecs_template:
             score = 0
             for db_word in words:
@@ -41,7 +41,7 @@ def fetch_article_count(api_url):
 def http_get(url):
     r = requests.get(url, timeout=GET_TIMEOUT)
     if r.status_code != 200:
-        raise HttpException('Get. Code: ' + str(r.status_code) + ' || Response: ' + r.text)
+        raise HttpException(f'Get. Code: {r.status_code} || Response: {r.text}')
     else:
         return r.json()
     

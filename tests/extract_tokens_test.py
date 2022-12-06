@@ -4,7 +4,6 @@ from tokens.extract_tokens import add_tokens_to_articles
 from tokens.token_dict_class import TokenDict
 from tokens.extract_tokens import get_tokens
 
-
 class TestAddTokensToArticles(unittest.TestCase):
     def test_add_tokens_to_articles_general(self):
         art_input = ArticleClass('headline', 'publication', 'name')
@@ -61,7 +60,6 @@ class TestAddTokensToArticles(unittest.TestCase):
         text = 'speciallægepraksisplanlægningsstabiliseringsperiodespeciallægepraksisplanlægningsstabiliseringsperiode'
         expected_list = []
         self.assertEqual(get_tokens(text), expected_list)
-
 
 if __name__ == '__main__':
     unittest.main()

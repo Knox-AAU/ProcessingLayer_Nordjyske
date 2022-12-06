@@ -76,7 +76,7 @@ class TestParserGetParagraph(unittest.TestCase):
         result = remove_duplicates(arts)
         self.assertTrue(len(result) == 2)
 
-    def test_is_not_duplicate_2(self):
+    def test_is_duplicate_different_total_words(self):
         arts = []
         art1 = article_class.ArticleClass(
             headline='headline1', publication='nordjyske', author_name='Søren')
@@ -113,7 +113,6 @@ class TestParserGetParagraph(unittest.TestCase):
                 art.body_text = body_text
                 art.sub_head = sub_head
                 self.assertEqual(get_token_count(art), expected_count)
-
 
 if __name__ == '__main__':
     unittest.main()
