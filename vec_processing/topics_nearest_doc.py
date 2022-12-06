@@ -2,7 +2,7 @@ from datetime import datetime
 from data_handler.fetch import fetch_editable_categories
 from data_handler.update import update_document_category
 from data_handler.insert import insert_category_amount, insert_nearest_arts
-from data_handler.delete import delete_categories, delete_nearest_arts
+from data_handler.delete import delete_categories, delete_nearest_docs
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_nearest_arts
@@ -57,6 +57,18 @@ def update_topics(topics, db_ids):
     return categories
 
 def insert_nearest_docs(api_url, storage_path):
-    nearest_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
-    #delete_nearest_arts(api_url) Fix plz
-    insert_nearest_arts(nearest_data, api_url)
+    nearest_docs_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
+    delete_nearest_docs(api_url)
+    nearest_docs = []
+    for arts in nearest_docs_data:
+        main_id = arts['art_id']
+        for nearest in arts['nearest']:
+            nearest_doc_id = nearest['id']
+            dist = nearest['dist']
+            similarity_data = {
+                'mainDocumentId': main_id,
+                'similarDocumentId': nearest_doc_id,
+                'similarity': dist
+            }
+            nearest_docs.append(similarity_data)
+    insert_nearest_arts(nearest_docs, api_url)

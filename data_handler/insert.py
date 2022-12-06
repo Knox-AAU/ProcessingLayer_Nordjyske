@@ -16,8 +16,8 @@ def insert_category_amount(api_url, n_clusters):
     for i in range(1, n_clusters+1):
         http_post(api_url+'categories?name=noName'+str(i), '')
 
-def insert_nearest_arts(articles, api_url):
-    http_post(api_url+'similar-documents', articles)
+def insert_nearest_arts(nearest_docs, api_url):
+    http_post(api_url+'similar-documents', nearest_docs)
 
 def make_article_json(art):
     return [{
@@ -78,8 +78,8 @@ def make_tokens_json(art):
 
 def http_post(url, json_data):
     r = requests.post(url, json=json_data, timeout=POST_TIMEOUT)
-    if r.status_code != 200:
+    if r.status_code not in (200, 204):
         data = '|| Response: ' + r.text + ' || Data: ' + str(json_data)
         raise HttpException('Post. Code: ' + str(r.status_code) + data)
-    else:
+    if r.text != '':
         return r.json()

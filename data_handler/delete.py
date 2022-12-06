@@ -7,11 +7,11 @@ def delete_categories(api_url, ids):
     for id in ids:
         http_delete(api_url + 'categories/' + str(id))
 
-def delete_nearest_arts(api_url):
-    http_delete(api_url + 'delete-all/')
+def delete_nearest_docs(api_url):
+    http_delete(api_url + 'similar-documents/delete-all/')
 
 def http_delete(url):
     r = requests.delete(url, timeout=DELETE_TIMEOUT)
-    if r.status_code != 200:
+    if r.status_code != 200 and r.status_code != 204:
         raise HttpException('Delete. Code: ' + str(r.status_code) + ' || Response: ' + r.text)
     
