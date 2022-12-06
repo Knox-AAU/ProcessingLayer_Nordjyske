@@ -69,16 +69,4 @@ def split_2d_list(word_vecs):
 def insert_nearest_docs(api_url, storage_path):
     nearest_docs_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
     delete_nearest_docs(api_url)
-    nearest_docs = []
-    for arts in nearest_docs_data:
-        main_id = arts['art_id']
-        for nearest in arts['nearest']:
-            nearest_doc_id = nearest['id']
-            dist = nearest['dist']
-            similarity_data = {
-                'mainDocumentId': main_id,
-                'similarDocumentId': nearest_doc_id,
-                'similarity': dist
-            }
-            nearest_docs.append(similarity_data)
-    insert_nearest_arts(nearest_docs, api_url)
+    insert_nearest_arts(nearest_docs_data, api_url)
