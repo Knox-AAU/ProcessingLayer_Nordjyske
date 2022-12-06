@@ -49,8 +49,9 @@ class TestAddTokensToArticles(unittest.TestCase):
         self.assertDictEqual(art_output[0].tokens, tokens)
 
     def test_get_token_parameterized(self):
-        param_list = [('lol no', ['lol', 'no']),
-                      ('ming mang ming mang', ['ming', 'mang', 'ming', 'mang'])]
+        param_list = [('test1 test2', ['test1', 'test2']),
+                      ('test1 test2 test3 test4', [
+                          'test1', 'test2', 'test3', 'test4'])]
         for text, output_list in param_list:
             with self.subTest():
                 self.assertEqual(get_tokens(text), output_list)

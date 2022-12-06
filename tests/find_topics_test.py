@@ -1,7 +1,7 @@
 import unittest
 from vec_processing.topics_nearest_doc import split_2d_list
 
-class TestKMeansClustering (unittest.TestCase):
+class FindTopicsTest (unittest.TestCase):
     def test_split_2d_list(self):
         word_vecs = [{'id': 1, 'vec': [1, 2, 3]},
                      {'id': 2, 'vec': [1, 2, 3]},

@@ -32,7 +32,8 @@ class TestParserGetParagraph(unittest.TestCase):
                         {"kind":"paragraph", "value":"2.1"}]
                     """
         data = json.loads(json_data)
-        self.assertEqual(get_paragraph(data), (['sub1 ', 'sub2 '], ['1.1 1.2 ', '2.1 ']))
+        self.assertEqual(get_paragraph(
+            data), (['sub1 ', 'sub2 '], ['1.1 1.2 ', '2.1 ']))
 
     def test_get_paragraph_append_all_paragraphs_subheaders_sub2_empty(self):
         json_data = """[{"kind":"subheader", "value":"sub1"},
@@ -41,7 +42,8 @@ class TestParserGetParagraph(unittest.TestCase):
                         {"kind":"subheader", "value":"sub2"}]
                     """
         data = json.loads(json_data)
-        self.assertEqual(get_paragraph(data), (['sub1 ', 'sub2 '], ['1.1  1.2 ', '']))
+        self.assertEqual(get_paragraph(
+            data), (['sub1 ', 'sub2 '], ['1.1  1.2 ', '']))
 
     def test_get_paragraph_add_all_subheaders(self):
         json_data = """[{"kind":"subheader", "value":"sub1"},
@@ -100,10 +102,10 @@ class TestParserGetParagraph(unittest.TestCase):
     def test_parameterized_get_token_count(self):
         art = article_class.ArticleClass(
             headline='headline', publication='publication', author_name='name')
-        param_list = [('ming', 'mang', 3),
-                      ('ming ming', 'mang', 4),
-                      ('mingmang', '', 2),
-                      ('', 'mingmang', 2),
+        param_list = [('test1', 'test2', 3),
+                      ('test1 test2', 'test3', 4),
+                      ('test1', '', 2),
+                      ('', 'test2', 2),
                       ('', '', 1),
                       ('i', 'i', 1)]
         for body_text, sub_head, expected_count in param_list:
