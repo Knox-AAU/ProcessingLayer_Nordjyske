@@ -18,7 +18,7 @@ def main():
             word_vecs = get_word_vecs(API_URL, STORAGE_PATH)
             store_topics_nearest_docs(word_vecs, STORAGE_PATH)
         case '4':
-            #insert_topics(API_URL, STORAGE_PATH)
+            insert_topics(API_URL, STORAGE_PATH)
             insert_nearest_docs(API_URL, STORAGE_PATH)
         case _:
             print('Input was not correct')
