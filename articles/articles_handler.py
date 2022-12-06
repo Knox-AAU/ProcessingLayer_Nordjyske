@@ -4,7 +4,7 @@ from articles.json_parser import get_parsed_articles
 from articles.json_parser import remove_duplicates
 from tokens.extract_tokens import add_tokens_to_articles
 from data_handler.insert import insert_articles_tokens
-from data_handler.file_load_save import get_files_data
+from data_handler.file_load_save import get_files
 from data_handler.update import update_word_relevance
 from console import print_error, update_status_console, confirmation_insert_arts, print_success
 from exceptions import HttpException
@@ -13,7 +13,7 @@ def insert_arts_db(data_path, api_url):
     confirmation_insert_arts()
     start_time = datetime.now()
     try:
-        files = get_files_data(data_path)
+        files = get_files(data_path)
         articles = get_articles_tokens(files, start_time, data_path)
         print('Remove_duplicates...')
         articles = remove_duplicates(articles)
