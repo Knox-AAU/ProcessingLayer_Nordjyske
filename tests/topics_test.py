@@ -1,5 +1,5 @@
 import unittest
-from vec_processing.topics_nearest_doc import update_topics
+from vec_processing.topics_nearest_art import update_topics
 
 class TestTopicsNearestDoc(unittest.TestCase):
     def test_update_topics(self):

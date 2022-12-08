@@ -25,12 +25,12 @@ def make_tokens(text, rank):
     tokens = get_tokens(text)
     if len(tokens) == 0:
         return TokenDict()
-    counts = Counter(get_trimmed_words(tokens))
+    counts = Counter(get_trimmed_tokens(tokens))
     for token in counts:
         tokens_dict.add(token, counts[token], rank)
     return tokens_dict
 
-def get_trimmed_words(words):
+def get_trimmed_tokens(words):
     words_str = ' '.join(words)
     doc = NLP(words_str)
     word_lemmas = []

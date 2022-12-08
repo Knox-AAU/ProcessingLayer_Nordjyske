@@ -7,7 +7,7 @@ def delete_categories(api_url, ids):
     for cat_id in ids:
         http_delete(f'{api_url}categories/{cat_id}')
 
-def delete_nearest_docs(api_url):
+def delete_nearest_arts(api_url):
     http_delete(api_url + 'similar-documents/delete-all/')
 
 def http_delete(url):
