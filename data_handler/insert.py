@@ -49,13 +49,13 @@ def make_content_json(art):
         }]
     else:
         json_data = []
-        for index, sub_body in enumerate(zip(art.sub_head, art.body_text)):
-            if (sub_body[0] != '' and sub_body[1] != ''):
+        for index, sub, body in enumerate(zip(art.sub_head, art.body_text)):
+            if (sub != '' and body != ''):
                 json_data.append({
                     'documentId': art.id,
                     'index': index,
-                    'subheading': sub_body[0],
-                    'content': sub_body[1]
+                    'subheading': sub,
+                    'content': body
                 })
         return json_data
 
