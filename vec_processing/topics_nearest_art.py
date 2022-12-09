@@ -73,6 +73,6 @@ def set_nearest_arts(api_url, storage_path):
     nearest_arts_data = load_json_data(storage_path+NEAREAST_ARTS_FILE_NAME)
     delete_nearest_arts(api_url)
     for index, arts in enumerate(nearest_arts_data):
+        insert_nearest_arts(arts, api_url)
         if index % (len(nearest_arts_data)/PRINTOUT_DIVIDER) == 0: # for a slow printout
-            insert_nearest_arts(arts, api_url)
             print_process_percent(text, index+1 , len(nearest_arts_data), start_time)
