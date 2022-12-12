@@ -2,7 +2,7 @@ from datetime import datetime
 from data_handler.fetch import fetch_editable_categories
 from data_handler.update import update_document_category
 from data_handler.insert import insert_category_amount, insert_nearest_arts
-from data_handler.delete import delete_categories, delete_nearest_docs
+from data_handler.delete import delete_categories, delete_nearest_arts
 from data_handler.file_load_save import save_json_data, load_json_data
 from vec_processing.find_topics import find_topics
 from vec_processing.find_nearest_articles import get_nearest_arts
@@ -10,8 +10,8 @@ from console import print_warning, confirmation_insert_new_categories, print_pro
 
 NEAREAST_ARTS_AMOUNT = 5
 TOPICS_FILE_NAME = 'topics.json'
-NEAREAST_DOCS_FILE_NAME = 'neareast_docs.json'
-PRINTOUT_DIVIDER = 400
+NEAREAST_ARTS_FILE_NAME = 'neareast_docs.json'
+PRINTOUT_DIVIDER = 1000
 
 def store_topics_nearest_docs(word_vecs, storage_path):
     start_time = datetime.now()
@@ -22,12 +22,12 @@ def store_topics_nearest_docs(word_vecs, storage_path):
     save_json_data(storage_path, TOPICS_FILE_NAME, topics)
     print(f'Topics made and saved in: {datetime.now() - start_time}')
     print('Finding nearest articles...')
-    neareast_docs = get_nearest_arts(vecs, ids, NEAREAST_ARTS_AMOUNT)
+    neareast_arts = get_nearest_arts(vecs, ids, NEAREAST_ARTS_AMOUNT)
     print('Saving neareast docs...')
-    save_json_data(storage_path, NEAREAST_DOCS_FILE_NAME, neareast_docs)
+    save_json_data(storage_path, NEAREAST_ARTS_FILE_NAME, neareast_arts)
     print(f'Total time: {datetime.now() - start_time}')
 
-def insert_topics(api_url, storage_path):
+def set_topics(api_url, storage_path):
     topics_data = load_json_data(storage_path+TOPICS_FILE_NAME)
     n_clusters = topics_data['n_clusters']
     topics = topics_data['topics']
@@ -66,7 +66,13 @@ def split_2d_list(word_vecs):
         ids.append(word_vec['id'])
     return vecs, ids
 
-def insert_nearest_docs(api_url, storage_path):
-    nearest_docs_data = load_json_data(storage_path+NEAREAST_DOCS_FILE_NAME)
-    delete_nearest_docs(api_url)
-    insert_nearest_arts(nearest_docs_data, api_url)
+def set_nearest_arts(api_url, storage_path):
+    start_time = datetime.now()
+    text = 'Updating similar-documents in db...'
+    print(text)
+    nearest_arts_data = load_json_data(storage_path+NEAREAST_ARTS_FILE_NAME)
+    delete_nearest_arts(api_url)
+    for index, arts in enumerate(nearest_arts_data):
+        insert_nearest_arts(arts, api_url)
+        if index % (len(nearest_arts_data)/PRINTOUT_DIVIDER) == 0: # for a slow printout
+            print_process_percent(text, index+1 , len(nearest_arts_data), start_time)

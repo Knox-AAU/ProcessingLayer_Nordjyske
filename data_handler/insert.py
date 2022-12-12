@@ -16,16 +16,15 @@ def insert_category_amount(api_url, n_clusters):
     for i in range(1, n_clusters+1):
         http_post(api_url+'categories?name=noName'+str(i), '')
 
-def insert_nearest_arts(nearest_docs_data, api_url):
+def insert_nearest_arts(arts, api_url):
     nearest_docs = []
-    for arts in nearest_docs_data:
-        for nearest in arts['nearest']:
-            similarity_data = {
-                'mainDocumentId': arts['art_id'],
-                'similarDocumentId': nearest['id'],
-                'similarity': nearest['dist']
-            }
-            nearest_docs.append(similarity_data)
+    for nearest in arts['nearest']:
+        similarity_data = {
+            'mainDocumentId': arts['art_id'],
+            'similarDocumentId': nearest['id'],
+            'similarity': nearest['dist']
+        }
+        nearest_docs.append(similarity_data)
     http_post(api_url+'similar-documents', nearest_docs)
 
 def make_article_json(art):
@@ -50,13 +49,13 @@ def make_content_json(art):
         }]
     else:
         json_data = []
-        for index, sub_body in enumerate(zip(art.sub_head, art.body_text)):
-            if (sub_body[0] != '' and sub_body[1] != ''):
+        for index, (sub, body) in enumerate(zip(art.sub_head, art.body_text)):
+            if (sub != '' and body != ''):
                 json_data.append({
                     'documentId': art.id,
                     'index': index,
-                    'subheading': sub_body[0],
-                    'content': sub_body[1]
+                    'subheading': sub,
+                    'content': body
                 })
         return json_data
 

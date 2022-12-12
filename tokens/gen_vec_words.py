@@ -1,12 +1,14 @@
 import re
+from datetime import datetime
 from collections import Counter
 from data_handler.fetch import fetch_tokens
 from data_handler.file_load_save import save_json_data
+from console import print_process_percent
 
-TOKENS_LEN = 10000
-SPLIT_LEN = 1000
-REMOVE_COUNT_OVER = 50
-SELECT_TOP = 200
+INCLUDE_TOP_TOKENS = 10000000
+SPLIT_LEN = 10000
+REMOVE_COUNT_OVER = 350
+SELECT_TOP = 1000
 VECS_TEMPLATE_FILE_NAME = 'word_vecs_template.json'
 
 def store_word_vecs_template(api_url, storage_path):
@@ -18,12 +20,15 @@ def store_word_vecs_template(api_url, storage_path):
     save_json_data(storage_path, VECS_TEMPLATE_FILE_NAME, words)
 
 def get_all_words_count(api_url):
-    print('Getting tokens:')
+    text = 'Getting tokens...'
+    print(text)
+    start_time = datetime.now()
     words_count = Counter()
-    for i in range(int(TOKENS_LEN/SPLIT_LEN)):
+    for i in range(int(INCLUDE_TOP_TOKENS/SPLIT_LEN)):
         words_count |= Counter(remove_non_words(
             fetch_tokens(api_url, SPLIT_LEN, SPLIT_LEN*i)))
-        print(f'{i+1} of {int(TOKENS_LEN/SPLIT_LEN)} words len: {len(words_count)}')
+        count_text = f'\nCurrent word count: {len(words_count)}'
+        print_process_percent(text+count_text, i+1, INCLUDE_TOP_TOKENS/SPLIT_LEN, start_time)
     return words_count
 
 def remove_non_words(tokens_list):
