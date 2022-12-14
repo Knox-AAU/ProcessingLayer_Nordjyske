@@ -25,8 +25,7 @@ def get_all_words_count(api_url):
     start_time = datetime.now()
     words_count = Counter()
     for i in range(int(INCLUDE_TOP_TOKENS/SPLIT_LEN)):
-        words_count |= Counter(remove_non_words(
-            fetch_tokens(api_url, SPLIT_LEN, SPLIT_LEN*i)))
+        words_count |= Counter(remove_non_words(fetch_tokens(api_url, SPLIT_LEN, SPLIT_LEN*i)))
         count_text = f'\nCurrent word count: {len(words_count)}'
         print_process_percent(text+count_text, i+1, INCLUDE_TOP_TOKENS/SPLIT_LEN, start_time)
     return words_count
