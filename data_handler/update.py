@@ -7,10 +7,10 @@ def update_word_relevance(api_url):
     print('Updating word relevance (tfidf)...')
     http_put_no_args(api_url + 'tf-idf/update')
 
-def update_document_category(api_url, topic):
+def update_document_category(api_url, category):
     data = {
-        'documentId': topic['id'],
-        'categoryId': topic['category']
+        'documentId': category['id'],
+        'categoryId': category['category']
     }
     http_put(api_url + 'documents/category', data)
 
