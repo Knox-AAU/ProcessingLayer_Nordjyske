@@ -24,12 +24,12 @@ def fetch_word_vecs(api_url, limit, offset, vecs_template):
     documents = http_get(f'{api_url}documents?limit={limit}&offset={offset}')
     for doc in documents:
         word_vecs = []
-        words = http_get(f'{api_url}word-ratios/documents/' + str(doc['id']))
-        for t_word in vecs_template:
+        tokens = http_get(f'{api_url}word-ratios/documents/' + str(doc['id']))
+        for tem_word in vecs_template:
             score = 0
-            for db_word in words:
-                if t_word == db_word['word']:
-                    score = db_word['clusteringScore']
+            for token in tokens:
+                if tem_word == token['word']:
+                    score = token['clusteringScore']
                     break
             word_vecs.append(score)
         all_word_vecs.append({'id': doc['id'], 'vec': word_vecs})

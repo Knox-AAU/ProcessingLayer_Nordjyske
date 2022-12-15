@@ -1,9 +1,9 @@
 import unittest
-from vec_processing.topics_nearest_art import update_topics
+from vec_processing.topics_nearest_art import topic_to_category
 from vec_processing.topics_nearest_art import split_2d_list
 
 class TopicsTest(unittest.TestCase):
-    def test_update_topics(self):
+    def test_topic_to_category(self):
         topics = [
             {'id': 1, 'topic': 0},
             {'id': 1, 'topic': 1},
@@ -12,7 +12,7 @@ class TopicsTest(unittest.TestCase):
             {'id': 1, 'topic': 3}
         ]
         db_ids = [1, 5, 77, 2]
-        self.assertEqual(update_topics(topics, db_ids), [
+        self.assertEqual(topic_to_category(topics, db_ids), [
             {'id': 1, 'category': 1},
             {'id': 1, 'category': 5},
             {'id': 1, 'category': 77},
@@ -20,11 +20,11 @@ class TopicsTest(unittest.TestCase):
             {'id': 1, 'category': 2}
         ])
 
-    def test_update_topics_no_match(self):
+    def test_topic_to_category_no_match(self):
         topics = [{'id': 1, 'topic': 4}]
         db_ids = [1, 2, 3]
         with self.assertRaises(IndexError):
-            update_topics(topics, db_ids)
+            topic_to_category(topics, db_ids)
 
 class TopicsNearestDocTest(unittest.TestCase):
     def test_split_2d_list(self):
