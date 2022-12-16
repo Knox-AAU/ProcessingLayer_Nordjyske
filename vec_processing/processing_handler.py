@@ -20,7 +20,7 @@ def store_clusters_nearest_docs(word_vecs, storage_path):
     clusters = find_clusters(vecs, ids)
     print('Saving clusters...')
     save_json_data(storage_path, CLUSTERS_FILE_NAME, clusters)
-    print(f'Topics made and saved in: {datetime.now() - start_time}')
+    print(f'Clusters made and saved in: {datetime.now() - start_time}')
     print('Finding nearest articles...')
     neareast_arts = get_nearest_arts(vecs, ids, NEAREAST_ARTS_AMOUNT)
     print('Saving neareast docs...')
