@@ -3,7 +3,7 @@ from datetime import datetime
 from sklearn.cluster import KMeans
 import numpy as np
 from sklearn.metrics import silhouette_score
-from vec_processing.find_topics import split_2d_list
+from vec_processing.find_clusters import split_2d_list
 
 MAX_N_RANGE = 50
 
