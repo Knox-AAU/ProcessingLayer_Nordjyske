@@ -2,7 +2,7 @@ from tokens.gen_vec_words import store_word_vecs_template
 from tokens.words_vecs import get_word_vecs
 from articles.articles_handler import insert_arts_db
 from console import print_menu
-from vec_processing.topics_nearest_art import store_topics_nearest_docs, set_topics, set_nearest_arts
+from vec_processing.processing_handler import store_clusters_nearest_docs, set_clusters, set_nearest_arts
 
 DATA_PATH = 'jsonTestData/'
 STORAGE_PATH = 'storage_data/'
@@ -16,9 +16,9 @@ def main():
             store_word_vecs_template(API_URL, STORAGE_PATH)
         case '3':
             word_vecs = get_word_vecs(API_URL, STORAGE_PATH)
-            store_topics_nearest_docs(word_vecs, STORAGE_PATH)
+            store_clusters_nearest_docs(word_vecs, STORAGE_PATH)
         case '4':
-            set_topics(API_URL, STORAGE_PATH)
+            set_clusters(API_URL, STORAGE_PATH)
             set_nearest_arts(API_URL, STORAGE_PATH)
         case _:
             print('Input was not correct')

@@ -1,18 +1,18 @@
 import unittest
-from vec_processing.topics_nearest_art import topic_to_category
-from vec_processing.topics_nearest_art import split_2d_list
+from vec_processing.processing_handler import cluster_to_category
+from vec_processing.processing_handler import split_2d_list
 
 class TopicsTest(unittest.TestCase):
-    def test_topic_to_category(self):
-        topics = [
-            {'id': 1, 'topic': 0},
-            {'id': 1, 'topic': 1},
-            {'id': 1, 'topic': 2},
-            {'id': 1, 'topic': 1},
-            {'id': 1, 'topic': 3}
+    def test_clusters_to_category(self):
+        clusters = [
+            {'id': 1, 'cluster': 0},
+            {'id': 1, 'cluster': 1},
+            {'id': 1, 'cluster': 2},
+            {'id': 1, 'cluster': 1},
+            {'id': 1, 'cluster': 3}
         ]
         db_ids = [1, 5, 77, 2]
-        self.assertEqual(topic_to_category(topics, db_ids), [
+        self.assertEqual(cluster_to_category(clusters, db_ids), [
             {'id': 1, 'category': 1},
             {'id': 1, 'category': 5},
             {'id': 1, 'category': 77},
@@ -20,11 +20,11 @@ class TopicsTest(unittest.TestCase):
             {'id': 1, 'category': 2}
         ])
 
-    def test_topic_to_category_no_match(self):
-        topics = [{'id': 1, 'topic': 4}]
+    def test_cluster_to_category_no_match(self):
+        clusters = [{'id': 1, 'cluster': 4}]
         db_ids = [1, 2, 3]
         with self.assertRaises(IndexError):
-            topic_to_category(topics, db_ids)
+            cluster_to_category(clusters, db_ids)
 
 class TopicsNearestDocTest(unittest.TestCase):
     def test_split_2d_list(self):
