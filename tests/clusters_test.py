@@ -2,7 +2,7 @@ import unittest
 from vec_processing.processing_handler import cluster_to_category
 from vec_processing.processing_handler import split_2d_list
 
-class TopicsTest(unittest.TestCase):
+class ClustersTest(unittest.TestCase):
     def test_clusters_to_category(self):
         clusters = [
             {'id': 1, 'cluster': 0},
@@ -26,7 +26,7 @@ class TopicsTest(unittest.TestCase):
         with self.assertRaises(IndexError):
             cluster_to_category(clusters, db_ids)
 
-class TopicsNearestDocTest(unittest.TestCase):
+class ProcessingHandlerTest(unittest.TestCase):
     def test_split_2d_list(self):
         word_vecs = [{'id': 1, 'vec': [1, 2, 3]},
                      {'id': 2, 'vec': [1, 2, 3]},
