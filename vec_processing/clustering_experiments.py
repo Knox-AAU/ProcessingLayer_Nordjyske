@@ -3,7 +3,7 @@ from datetime import datetime
 from sklearn.cluster import KMeans
 import numpy as np
 from sklearn.metrics import silhouette_score
-from vec_processing.find_clusters import split_2d_list
+from vec_processing.processing_handler import split_2d_list
 
 MAX_N_RANGE = 50
 
@@ -28,12 +28,11 @@ def find_elbow_for_range_n(array, range_n):
     plt.plot(number_clusters, intertia)
     plt.title('The Elbow')
     plt.xlabel('Number of clusters')
-    plt.ylabel('Intertia')
+    plt.ylabel('Inertia')
     plt.show()
 
-def find_silhouette_for_range_n(word_vecs, range_n):
+def find_silhouette_for_range_n(vecs, range_n):
     silhouette = []
-    vecs, id = split_2d_list(word_vecs)
     for i in range(2, range_n):
         kmeans = KMeans(i)
         kmeans.fit(vecs)
@@ -42,8 +41,8 @@ def find_silhouette_for_range_n(word_vecs, range_n):
         print(f'For n_clusters ={i}. The average silhouette_score is :{silhouette_avg}')
     number_clusters = range(2, range_n)
     plt.plot(number_clusters, silhouette)
-    plt.title('Silhouette')
+    plt.title('Silhouette Score')
     plt.xlabel('Number of clusters')
-    plt.ylabel('Intertia')
+    plt.ylabel('Silhouette')
     plt.show()
     return silhouette_avg

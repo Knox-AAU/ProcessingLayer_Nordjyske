@@ -39,9 +39,9 @@ def set_clusters(api_url, storage_path):
             insert_category_amount(api_url, n_clusters)
         else:
             return
-    set_documents_clusters(api_url, clusters)
+    set_articles_clusters(api_url, clusters)
 
-def set_documents_clusters(api_url, clusters):
+def set_articles_clusters(api_url, clusters):
     text = 'Updating category on documents in db...'
     print(text)
     db_ids = fetch_editable_categories(api_url)

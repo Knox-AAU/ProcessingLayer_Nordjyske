@@ -2,8 +2,8 @@ import unittest
 import math
 from vec_processing.find_nearest_articles import get_nearest_arts
 
-class TestGetNearestDocument (unittest.TestCase):
-    def test_get_nearest_document_2d(self):
+class TestGetNearestArticles (unittest.TestCase):
+    def test_get_nearest_articles_2d(self):
         article_id_list = [1,2]
         article_vector_list = [
             [1, 2, 3],
@@ -19,7 +19,7 @@ class TestGetNearestDocument (unittest.TestCase):
         ]
         self.assertEqual(get_nearest_arts(article_vector_list, article_id_list, 1), expected_output)
 
-    def test_get_nearest_document_2d_zero(self):
+    def test_get_nearest_articles_2d_zero(self):
         article_id_list = [1, 2]
         article_vector_list = [
             [0.33, 0.33, 0.33],
@@ -33,7 +33,7 @@ class TestGetNearestDocument (unittest.TestCase):
         ]}]
         self.assertEqual(get_nearest_arts(article_vector_list, article_id_list, 1), expected_output)
 
-    def test_get_nearest_document_2d_normalize(self):
+    def test_get_nearest_articles_2d_normalize(self):
         article_id_list = [1,2]
         article_vector_list = [
             [0.2672, 0.5345, 0.8017],
@@ -48,7 +48,7 @@ class TestGetNearestDocument (unittest.TestCase):
 
         self.assertEqual(get_nearest_arts(article_vector_list, article_id_list, 1), expected_output)
 
-    def test_get_nearest_document_3d(self):
+    def test_get_nearest_articles_3d(self):
         article_id_list = [1,4,2]
         article_vector_list = [
             [1, 2, 3],
