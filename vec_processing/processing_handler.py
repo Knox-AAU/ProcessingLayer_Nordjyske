@@ -13,7 +13,7 @@ CLUSTERS_FILE_NAME = 'clusters.json'
 NEAREAST_ARTS_FILE_NAME = 'neareast_docs.json'
 PRINTOUT_DIVIDER = 1000
 
-def store_clusters_nearest_docs(word_vecs, storage_path):
+def store_clusters_nearest_arts(word_vecs, storage_path):
     start_time = datetime.now()
     print('Start clustering...')
     vecs, ids = split_2d_list(word_vecs)
@@ -23,7 +23,7 @@ def store_clusters_nearest_docs(word_vecs, storage_path):
     print(f'Clusters made and saved in: {datetime.now() - start_time}')
     print('Finding nearest articles...')
     neareast_arts = get_nearest_arts(vecs, ids, NEAREAST_ARTS_AMOUNT)
-    print('Saving neareast docs...')
+    print('Saving neareast articles...')
     save_json_data(storage_path, NEAREAST_ARTS_FILE_NAME, neareast_arts)
     print(f'Total time: {datetime.now() - start_time}')
 
