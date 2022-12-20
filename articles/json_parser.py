@@ -17,9 +17,9 @@ def remove_duplicates(articles):
 
 def parse_article(data, file_path):
     art = ArticleClass(data['headline'], data['publication'], data['byline']['name'])
-    result = get_paragraph(data['paragraphs'])
-    art.sub_head = result[0]
-    art.body_text = result[1]
+    sub, body = get_paragraph(data['paragraphs'])
+    art.sub_head = sub
+    art.body_text = body
     art.published_at = data['published_at']
     art.publisher = data['publisher']
     art.data_id = data['id']
