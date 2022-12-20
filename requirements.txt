@@ -3,6 +3,5 @@
 numpy
 requests
 scikit-learn
-unittest
 datetime
 matplotlib
