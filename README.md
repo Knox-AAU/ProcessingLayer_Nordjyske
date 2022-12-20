@@ -9,7 +9,7 @@ To be able to run the program follow these steps:
 
 ## Architecture
 The arcitecture diagram for the whole program can be seen in the following figure:
-[Architecture diagram](https://raw.githubusercontent.com/Knox-AAU/ProcessingLayer_Nordjyske/main/images/fullArchitectureDiagram.png).
+![Architecture diagram](https://raw.githubusercontent.com/Knox-AAU/ProcessingLayer_Nordjyske/main/images/fullArchitectureDiagram.png).
 
 ## Requirements
 The packages that the program needs to be able to run is written in the `requirements.txt` file. But the spacy package should be installed manually by following spaces installation guide [here](https://spacy.io/usage). Select the danish trained pipeline and the pipeline for efficiency we used the pip package manager. The generated commands can be run in a terminal, make sure they are installed in the same environment.
@@ -18,13 +18,13 @@ The packages that the program needs to be able to run is written in the `require
 Curently the API for the database can be found on knox-node02.srv.aau.dk port 5502. To connect SSH to the knox node 2 server by running the following command in a terminal: `ssh -L 5501:localhost:5501 <username>@student.aau.dk@knox-node02.srv.aau.dk`. If any issues accur more information can be found [here](https://wiki.knox.cs.aau.dk/en/Database/DocumentDataAPI/Introduction).
 
 ## Contact
-Wiki Link: [https://wiki.knox.cs.aau.dk](https://wiki.knox.cs.aau.dk/)
+Wiki Link: [https://wiki.knox.cs.aau.dk](https://wiki.knox.cs.aau.dk/) \
 Project Link: [https://github.com/Knox-AAU/ProcessingLayer_Nordjyske](https://github.com/Knox-AAU/ProcessingLayer_Nordjyske/)
 ### Authors
 #### 2022
-André Larsen Freiesleben
-Jakob Frederik Lykke
-Kasper Østergaard Nielsen
-Martin Langgaard Jacobsen
-Patrick Baghlani Reffsøe
-Peter Schwartz Lauridsen
+André Larsen Freiesleben \
+Jakob Frederik Lykke \
+Kasper Østergaard Nielsen \
+Martin Langgaard Jacobsen \
+Patrick Baghlani Reffsøe \
+Peter Schwartz Lauridsen \
