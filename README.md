@@ -3,7 +3,7 @@
 To be able to run the program follow these steps:
 1. Clone the GitHub repository.
 2. Install all [requirements](#Requirements) on your system we use the pip package manager.
-3. Connect to the [API for the database](#Connecting to the DB API).
+3. Connect to the [API for the database](#connecting-to-the-db-api).
 4. Run the program in Visual Studio Code by pressing F5 or run `main.py`.
 5. If everything is working a menu should be printed in the console and steps 1-4 can be run if needed.
 
@@ -27,4 +27,4 @@ Jakob Frederik Lykke \
 Kasper Østergaard Nielsen \
 Martin Langgaard Jacobsen \
 Patrick Baghlani Reffsøe \
-Peter Schwartz Lauridsen \
+Peter Schwartz Lauridsen 
