@@ -1,5 +1,5 @@
-#Installation command: pip install --no-cache-dir --upgrade -r requirements.txt
-#spacy - should be installed with the spacy installation guide
+#pip install --no-cache-dir --upgrade -r requirements.txt
+spacy
 numpy
 requests
 scikit-learn
