@@ -18,7 +18,7 @@ The packages that the program needs to be able to run are written in the `requir
 Currently, the API for the database can be found on knox-node02.srv.aau.dk port 5502. To connect, SSH to the Knox node 2 server by running the following command in a terminal: `ssh -L 5501:localhost:5501 <username>@student.aau.dk@knox-node02.srv.aau.dk`. If any issues occur, more information can be found [here](https://wiki.knox.cs.aau.dk/en/Database/DocumentDataAPI/Introduction).
 
 ## Contact
-Wiki link: [wiki.knox.cs.aau.dk](https://wiki.knox.cs.aau.dk/) \
+Wiki link: [wiki.knox.cs.aau.dk/en/Preprocessing/GruppeA/GeneralInformation) \
 Project link: [github.com/Knox-AAU/ProcessingLayer_Nordjyske](https://github.com/Knox-AAU/ProcessingLayer_Nordjyske/)
 ### Authors 2022
 André Larsen Freiesleben \
