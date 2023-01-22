@@ -10,7 +10,7 @@ class TestAddTokensToArticles(unittest.TestCase):
         art_input.sub_head = ['test test subhead.']
         art_input.body_text = ['test word.']
         tokens = TokenDict()
-        tokens.add('headlin', 1, 1)
+        tokens.add('headline', 1, 1)
         tokens.add('test', 3, 2)
         tokens.add('subhead', 1, 2)
         tokens.add('word', 1, 3)
