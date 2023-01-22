@@ -6,11 +6,11 @@ from tokens.extract_tokens import get_tokens
 
 class TestAddTokensToArticles(unittest.TestCase):
     def test_add_tokens_to_articles_general(self):
-        art_input = ArticleClass('headline', 'publication', 'name')
+        art_input = ArticleClass('heading', 'publication', 'name')
         art_input.sub_head = ['test test subhead.']
         art_input.body_text = ['test word.']
         tokens = TokenDict()
-        tokens.add('headline', 1, 1)
+        tokens.add('heading', 1, 1)
         tokens.add('test', 3, 2)
         tokens.add('subhead', 1, 2)
         tokens.add('word', 1, 3)
